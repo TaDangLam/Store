@@ -55,7 +55,7 @@ const userController = {
                 },
                     process.env.JWT_ACCESS_KEY,
                 {
-                    expiresIn: "5m"
+                    expiresIn: "1s"
                 });
 
                 // refreshToken
@@ -90,7 +90,7 @@ const userController = {
 
     // Logout
     logoutUser: async(req, res) => {
-        res.clearCookie("refreshToken");
+        res.clearCookie("refreshTokenCookie");
         res.status(StatusCodes.OK).json("Logout successful");
     },
 
@@ -135,6 +135,7 @@ const userController = {
             //
             refreshTokenData.push(newRefreshToken);
             console.log(refreshTokenData);
+            res.clearCookie("refreshTokenCookie");
             // Save both in cookie
             res.cookie("newRefreshToken", newRefreshToken, {
                 httpOnly: true,
