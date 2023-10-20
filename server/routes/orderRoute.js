@@ -8,8 +8,8 @@ Router.post('/', orderController.addOrder);
 Router.get('/shipped', orderController.getAllShippedOrder);
 Router.get('/delivered', orderController.getAllDeliveredOrder);
 Router.get('/cancelled', orderController.getAllCancelledOrder);
-Router.delete('/:id/delete', orderController.deleteOrder);
-Router.patch('/:id/update', orderController.updateOrder);
+Router.delete('/delete/:id', orderController.deleteOrder);
+Router.patch('/update/:id', orderController.updateOrder);
 Router.get('/:userID', orderController.getUserOrder);
 
 
