@@ -27,7 +27,7 @@ const middlewareController = {
             if(req.user.role == "admin"){
                 next();
             }else {
-                return res.status(StatusCodes.UNAUTHORIZED).json("You are not allowed to delete other");
+                return res.status(StatusCodes.UNAUTHORIZED).json("You are not allowed to do it");
             }
         })
     }

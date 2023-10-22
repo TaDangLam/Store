@@ -29,7 +29,7 @@ const productController = {
     addProduct: async(req, res) => {
         try {
             const {name, description, price, amount, categories, images} = req.body;
-            const productDoc = await Product.create({name, description, price, amount, categories, images});
+            const productDoc = await Product.create({name, description, price, amount, categories, images: images || []});
             res.status(StatusCodes.CREATED).json(productDoc);
         }catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -40,8 +40,16 @@ const productController = {
     deleteProduct: async(req, res) => {
         const productID = req.params.id;
         try{
-            await Product.findByIdAndDelete(productID);
-            res.status(StatusCodes.OK).json("Product Delete Success");
+            const productDoc = await Product.findById(productID);
+            const uploadPath = path.join('./uploads/' + productDoc.name);
+            if (fs.existsSync(uploadPath)) {
+                // If it exists, delete the folder
+                fs.rmdirSync(uploadPath, { recursive: true }); // Use { recursive: true } to delete all files and subfolders within the folder
+                await Product.findByIdAndDelete(productID);
+                res.status(StatusCodes.OK).json("Product Delete Success");
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json("Product not found in the upload folder");
+            }
         }catch(err){
             console.log(err);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
