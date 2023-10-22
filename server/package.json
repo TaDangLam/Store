@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TaDangLam/LK-Shop.git"
+    "url": "git+https://github.com/TaDangLam/Store.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TaDangLam/LK-Shop/issues"
+    "url": "https://github.com/TaDangLam/Store/issues"
   },
-  "homepage": "https://github.com/TaDangLam/LK-Shop#readme",
+  "homepage": "https://github.com/TaDangLam/Store#readme",
   "type": "module",
   "dependencies": {
     "bcrypt": "^5.1.1",
