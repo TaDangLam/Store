@@ -51,8 +51,7 @@ const productController = {
             const productDoc = await Product.findById(productID);
             const uploadPath = path.join('./uploads/' + productDoc.name);
             if (fs.existsSync(uploadPath)) {
-                // If it exists, delete the folder
-                fs.rmdirSync(uploadPath, { recursive: true }); // Use { recursive: true } to delete all files and subfolders within the folder
+                fs.rmdirSync(uploadPath, { recursive: true }); 
                 await Product.findByIdAndDelete(productID);
                 res.status(StatusCodes.OK).json("Product Delete Success");
             } else {
