@@ -34,7 +34,7 @@ const userController = {
             const user = await User.findOne({ username: req.body.username });
             // check user in database
             if(!user){
-                res.status(StatusCodes.NOT_FOUND).json("Username does not exist");
+               return res.status(StatusCodes.NOT_FOUND).json("Username does not exist");
             }
             const validPassword = await bcrypt.compare(
                 req.body.password,
@@ -43,7 +43,7 @@ const userController = {
 
             // check validPassword
             if(!validPassword){
-                res.status(StatusCodes.NOT_FOUND).json("Incorrect password");
+                return res.status(StatusCodes.NOT_FOUND).json("Incorrect password");
             }
 
             // check user and validPassword
@@ -55,7 +55,7 @@ const userController = {
                 },
                     process.env.JWT_ACCESS_KEY,
                 {
-                    expiresIn: "5m"
+                    expiresIn: "15m"
                 });
 
                 // refreshToken
@@ -80,7 +80,7 @@ const userController = {
                 });
                 // lưu vào cookie thì khỏi trả về frontend
                 // res.status(StatusCodes.ACCEPTED).json({user, accessToken, refreshToken});
-                res.status(StatusCodes.ACCEPTED).json({user, accessToken});
+                return res.status(StatusCodes.ACCEPTED).json({user, accessToken});
 
             }
         } catch(err){
@@ -90,7 +90,7 @@ const userController = {
 
     // Logout
     logoutUser: async(req, res) => {
-        res.clearCookie("refreshToken");
+        res.clearCookie("refreshTokenCookie");
         res.status(StatusCodes.OK).json("Logout successful");
     },
 
@@ -135,6 +135,7 @@ const userController = {
             //
             refreshTokenData.push(newRefreshToken);
             console.log(refreshTokenData);
+            res.clearCookie("refreshTokenCookie");
             // Save both in cookie
             res.cookie("newRefreshToken", newRefreshToken, {
                 httpOnly: true,
@@ -167,7 +168,26 @@ const userController = {
         }
     },
 
-    
+    //update user
+    updateUser: async(req, res) => {
+        const { name, email, birth, username, password, phone } = req.body;
+        const userID = req.params.id;
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const hashed = await bcrypt.hash(password, salt);
+            const userData = await User.findByIdAndUpdate(userID, { 
+                name, 
+                email, 
+                birth, 
+                username, 
+                password: hashed, 
+                phone,
+            });
+            return res.status(StatusCodes.OK).json(userData);
+        } catch (err) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    }
 }
 
 export default userController;
