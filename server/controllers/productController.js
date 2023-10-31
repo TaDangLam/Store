@@ -1,3 +1,5 @@
+import path from 'path';
+import fs from 'fs';
 import { StatusCodes } from 'http-status-codes';
 
 import { Product } from '../model/productModel.js';
@@ -25,6 +27,17 @@ const productController = {
         }
     },
 
+    // Get Product By Category
+    getProductByCategory: async(req, res) => {
+        const categoryID = req.params.id;
+        try {
+            const data = await Product.find({ categories: categoryID});
+            res.status(StatusCodes.OK).json(data);
+        } catch(err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
+
     //Create Product
     addProduct: async(req, res) => {
         try {
@@ -41,7 +54,7 @@ const productController = {
         const productID = req.params.id;
         try{
             const productDoc = await Product.findById(productID);
-            const uploadPath = path.join('./uploads/' + productDoc.name);
+            const uploadPath = path.join('./public/uploads/' + productDoc.name);
             if (fs.existsSync(uploadPath)) {
                 // If it exists, delete the folder
                 fs.rmdirSync(uploadPath, { recursive: true }); // Use { recursive: true } to delete all files and subfolders within the folder

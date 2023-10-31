@@ -14,13 +14,22 @@ img {
 
 
 .wrapper{
-  @apply px-36  shadow-header;
+  @apply px-36 shadow-header;
 }
 
-.body-cus{
-  @apply px-36 bg-slate-300;
+.body-cus{  
+  @apply px-36 bg-slate-200;
 }
 
-/* .children-cus{
-  @apply bg-white;
-} */
+.flex-link{
+  @apply my-3 flex items-center gap-2 h-8;
+}
+
+.flex-link:hover{
+  @apply  hover:text-white hover:bg-gradient-to-r from-red-cus to-orange-cus;
+}
+
+.img-banner {
+  @apply w-full h-3/4 rounded-lg cursor-pointer;
+}
+

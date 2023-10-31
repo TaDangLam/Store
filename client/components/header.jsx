@@ -6,10 +6,6 @@ import { useState } from "react";
 
 const Header = () => {
 
-    const handleSearch = () => {
-
-    }
-
     return(
         <div className="parent-div">
             <div className=" flex items-center justify-between ">
@@ -17,7 +13,7 @@ const Header = () => {
                     <Link href={'/'}><img src="/logo.jpg" alt="logo" className="w-32 h-32 rounded"/></Link>
                 </div>
                 <form 
-                    onSubmit={handleSearch} 
+                     
                     className="flex items-center h-12 pl-6 w-488 bg-white"
                 >
                     <input 
@@ -33,22 +29,22 @@ const Header = () => {
                     </button>
                 </form> 
                 
-                <div className="flex items-center px-10 gap-10 bg-white">
-                    <div className=""><Link href={'/auth'} className="flex items-center bg-white text-lg hover:text-red-500"><FaUserAlt className="mr-1 "/>Login / Sign Up</Link></div>
-                    <div><Link href={'/cart'} className="flex items-center text-lg bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
+                <div className="flex items-center px-8 gap-10 bg-white">
+                    <div className=""><Link href={'/auth'} className="flex items-center bg-white  hover:text-red-500"><FaUserAlt className="mr-1 "/>Login / Sign Up</Link></div>
+                    <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
                 </div>
             </div>
             <div className=" flex gap-10 h-10 items-center ">
-                <div className="text-xl flex gap-2 items-center">
-                    <FaBars />
+                <div className="text-xl flex gap-2 items-center hover:text-red-500">
+                    <FaBars/>
                     Category
-                    <BiChevronDown className=""/>
+                    <BiChevronDown className="text-red-500"/>
                 </div>
-                <Link href={'/introduce'} className="text-xl flex gap-2 items-center">
+                <Link href={'/introduce'} className="text-xl flex gap-2 items-center hover:text-red-500">
                     <BiInfoCircle />
                     Introduce
                 </Link>
-                <Link href={'/blog'} className="text-xl flex gap-2 items-center">
+                <Link href={'/blog'} className="text-xl flex gap-2 items-center hover:text-red-500">
                     <FaBlogger />
                     Blog
                 </Link>

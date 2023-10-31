@@ -23,6 +23,7 @@ MongoConnect();
 app.use(cors());    
 app.use(express.json())
 app.use(cookieParser());
+app.use(express.static("./public"));
 
 //Router
 app.use('/api/product', API_Product),

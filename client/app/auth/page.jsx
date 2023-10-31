@@ -1,6 +1,8 @@
 const Login = () => {
     return(
-        <h1>Login Page</h1>
+        <div className="border border-red-600">
+            Login
+        </div>
     )
 }
 

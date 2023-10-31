@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     destination: function (req, images, cb) {
 
         // Create a new product's images directory if it doesn't already exist
-        const uploadPath = path.join('./uploads/' + req.body.name);
+        const uploadPath = path.join('./public/uploads/' + req.body.name);
         if (!fs.existsSync(uploadPath)){
             fs.mkdirSync(uploadPath);
         }
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
             fs.unlinkSync(imagePath);
             console.log(`Deleted: ${image}`);
         });
-        cb(null, './uploads/' + req.body.name);
+        cb(null, './public/uploads/' + req.body.name);
     },
     filename: function (req, images, cb) {
         const filename = images.originalname;
@@ -42,6 +42,7 @@ Router.get('/', productController.getAllProduct);
 Router.post('/', upload.any(), productController.addProduct);
 Router.get('/search/:key', productController.searchProduct);
 Router.get('/:id', productController.getProductDetail);
+Router.get('/category/:id', productController.getProductByCategory)
 Router.patch('/:id', upload.any(), productController.updateProduct);
 Router.delete('/:id', productController.deleteProduct);
 
