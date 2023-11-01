@@ -25,12 +25,15 @@ module.exports = {
       },
       colors: {
         'red-cus': '#f7434c',
+        'category': '#f7464c',
+        'phone': '#ff6600',
         'orange-cus': '#ff8949',
       },
       spacing: {
         '100': '16.875rem',
       },
       height: {
+        '63': '15.625rem',
         '100': '22.5rem',
       },
     },

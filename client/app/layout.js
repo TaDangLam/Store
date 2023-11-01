@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <main className='body-cus'>
           {children}
         </main>
-        {/* <footer><Footer /></footer> */}
+        <footer className='footer-cus'><Footer /></footer>
       </body>
     </html>
   )

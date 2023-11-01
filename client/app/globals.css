@@ -21,6 +21,14 @@ img {
   @apply px-36 bg-slate-200;
 }
 
+.footer-cus{
+  @apply px-36 mb-0;
+}
+
+.fix-footer{
+  @apply h-7;
+}
+
 .flex-link{
   @apply my-3 flex items-center gap-2 h-8;
 }
@@ -31,5 +39,9 @@ img {
 
 .img-banner {
   @apply w-full h-3/4 rounded-lg cursor-pointer;
+}
+
+.img-footer {
+  @apply w-8 h-7 rounded-lg;
 }
 

@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { useRouter, useParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
@@ -21,14 +21,21 @@ const Category = () => {
     return (
         <div className='py-5'>
             <div className=''>
-                <div className='bg-green-100'>bbbb</div>
-                <div className='grid grid-cols-5 grid-rows-5 gap-3'>
+                <div className='flex items-center justify-between my-10'>
+                    <h1 className='text-3xl'>Product</h1>
+                    <select className='h-10 rounded-lg'>
+                        <option value="">Sort</option>
+                        <option value="asc">Price: Low to High</option>
+                        <option value="desc">Price: High to Low</option>
+                    </select>
+                </div>
+                <div className='grid grid-cols-5 grid-rows-5 gap-4  '>
                 {productByCategory.map(product => (
-                    <Link href={`/productdetail/${product._id}`} className='bg-rose-100'>
-                        <div className='bg-white rounded-pd h-100'>
-                                <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-max'/>
-                                <div>{product.name}</div>
-                                <div>{product.price}</div>
+                    <Link href={`/productdetail/${product._id}`} className='bg-rose-600 '>
+                        <div className='bg-white rounded-pd h-100 w-full'>
+                                <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-full h-3/5 object-cover'/>
+                                <div className='h-1/5 text-lg text-center mt-0'>{product.name}</div>
+                                <div className='text-sm text-center text-category h-1/5 mb-0'>{product.price} &ensp;</div>
                         </div>
                     </Link>
                 ))}  

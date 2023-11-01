@@ -14,7 +14,7 @@ export default function Home() {
           <img src="/637730464244580551_cac-dong-mainboard-asus-1.png" className="object-cover  h-full w-full rounded-lg"/>
         </div>
         <div className="row-start-1 row-end-2 cursor-pointer">
-          <img src="/amd-ryzen-5000-processor.webp" alt="image" className="rounded-lg h-full"/>
+          <img src="/amd-ryzen-5000-processor.webp" alt="image" className="rounded-lg h-full object-cover"/>
         </div>
         <div className=" row-start-2 row-end-3 cursor-pointer">
           <img src="/intel-14th-gen-raptor-lake-refresh-cpu-lineup_345d37e7909d47338333553ef1adeae7_master.jpg" className="w-full h-full object-cover rounded-lg"/>
