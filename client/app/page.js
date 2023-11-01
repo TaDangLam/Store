@@ -28,7 +28,7 @@ export default function Home() {
         
       </div>
 
-      <div className="content2">
+      <div className="content2 bg-rose-200">
         <h1>aaaaaaaaa</h1>
       </div>
         

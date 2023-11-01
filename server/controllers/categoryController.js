@@ -15,11 +15,10 @@ const categoryController = {
 
     //Create Category
     addCategory: async(req, res) => {
-        const { name, properties, parentCategory } = req.body;
+        const { name, parentCategory } = req.body;
         try {
             const CategoryDoc = await Category.create({
-                name, 
-                properties, 
+                name,
                 parentCategory: parentCategory || undefined,
             });
             res.status(StatusCodes.CREATED).json(CategoryDoc);
@@ -31,9 +30,9 @@ const categoryController = {
     //Update Category
     updateCategory: async(req, res) => {
         const categoryID = req.params.id;
-        const { name, properties, parentCategory } = req.body;
+        const { name, parentCategory } = req.body;
         try {
-            const categoryDoc = await Category.findByIdAndUpdate(categoryID, { name, properties, parentCategory }, {new: true});
+            const categoryDoc = await Category.findByIdAndUpdate(categoryID, { name, parentCategory }, {new: true});
             res.status(StatusCodes.OK).json(categoryDoc);
         } catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

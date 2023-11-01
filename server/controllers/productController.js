@@ -41,8 +41,8 @@ const productController = {
     //Create Product
     addProduct: async(req, res) => {
         try {
-            const {name, description, price, amount, categories, images} = req.body;
-            const productDoc = await Product.create({name, description, price, amount, categories, images: images || []});
+            const {name, properties, price, amount, categories, images} = req.body;
+            const productDoc = await Product.create({name, properties, price, amount, categories, images: images || []});
             res.status(StatusCodes.CREATED).json(productDoc);
         }catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -72,9 +72,9 @@ const productController = {
     //Update Product
     updateProduct: async(req, res) => {
         const productID = req.params.id;
-        const { name, description, price, amount, images} = req.body;
+        const { name, properties, price, amount, images} = req.body;
         try {
-            const productDoc = await Product.findByIdAndUpdate(productID, { name, description, price, amount, images}, {new: true});
+            const productDoc = await Product.findByIdAndUpdate(productID, { name, properties, price, amount, images}, {new: true});
             res.status(StatusCodes.OK).json(productDoc);
         }catch(err) {
             console.log(err);

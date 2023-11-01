@@ -33,9 +33,11 @@ const Category = () => {
                 {productByCategory.map(product => (
                     <Link href={`/productdetail/${product._id}`} className='bg-rose-600 '>
                         <div className='bg-white rounded-pd h-100 w-full'>
-                                <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-full h-3/5 object-cover'/>
-                                <div className='h-1/5 text-lg text-center mt-0'>{product.name}</div>
-                                <div className='text-sm text-center text-category h-1/5 mb-0'>{product.price} &ensp;</div>
+                                <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-full h-4/6 object-cover'/>
+                                <div className='h-1/6 text-sm text-center mt-0'>{product.name}</div>
+                                <div className=' h-1/6 mb-0 flex items-center justify-center'>
+                                    <span className='text-sm  text-category'>{product.price} &ensp;</span>
+                                </div>
                         </div>
                     </Link>
                 ))}  
