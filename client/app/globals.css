@@ -45,3 +45,6 @@ img {
   @apply w-8 h-7 rounded-lg;
 }
 
+.properties-product li {
+  @apply text-gray-500;
+}

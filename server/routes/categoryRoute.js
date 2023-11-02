@@ -5,6 +5,7 @@ import categoryController from '../controllers/categoryController.js';
 
 Router.get('/', categoryController.getAllCategory);
 Router.post('/', categoryController.addCategory);
+Router.get('/:id', categoryController.getCategoryById);
 Router.patch('/:id', categoryController.updateCategory);
 Router.delete('/:id', categoryController.deleteCategory);
 

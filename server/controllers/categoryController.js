@@ -13,6 +13,17 @@ const categoryController = {
         }
     },
 
+    //Get Category by id
+    getCategoryById: async(req, res) => {
+        try {
+            const categoryID = req.params.id;
+            const data = await Category.findById(categoryID);
+            res.status(StatusCodes.OK).json(data);
+        } catch(err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
+
     //Create Category
     addCategory: async(req, res) => {
         const { name, parentCategory } = req.body;
