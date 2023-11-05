@@ -2,3 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-height: 100%;
+}
+
+
+.wrapper{
+  @apply px-36 shadow-header;
+}
+
+.body-cus{  
+  @apply px-36 bg-slate-200;
+}
+
+.footer-cus{
+  @apply px-36 mb-0;
+}
+
+.fix-footer{
+  @apply h-7;
+}
+
+.flex-link{
+  @apply my-3 flex items-center gap-2 h-8;
+}
+
+.flex-link:hover{
+  @apply  hover:text-white hover:bg-gradient-to-r from-red-cus to-orange-cus;
+}
+
+.img-banner {
+  @apply w-full h-3/4 rounded-lg cursor-pointer;
+}
+
+.img-footer {
+  @apply w-8 h-7 rounded-lg;
+}
+
+.properties-product li {
+  @apply text-gray-500;
+}
+
+.animateHidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100%);
+  transition: all 1s;
+}
+
+
+.animateHidden2 {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100%);
+  transition: all 1.25s;
+}
+
+.animateHidden3 {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100%);
+  transition: all 1.5s;
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.textAnimatedHidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+}
+
+.textAnimatedShow {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
