@@ -1,6 +1,9 @@
 const Cart = () => {
     return (
-        <h1>Cart Page</h1>
+        <div className="bg-rose-500">
+            <div>b</div>
+            <div>b</div>
+        </div>
     )
 }
 

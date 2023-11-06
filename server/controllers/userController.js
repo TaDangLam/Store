@@ -30,14 +30,17 @@ const userController = {
 
     // Login
     loginUser: async(req, res) => {
+        const username = req.body.username;
+        const password = req.body.password;
+        // console.log(req.body.password);
         try {
-            const user = await User.findOne({ username: req.body.username });
+            const user = await User.findOne({ username });
             // check user in database
             if(!user){
                return res.status(StatusCodes.NOT_FOUND).json("Username does not exist");
             }
             const validPassword = await bcrypt.compare(
-                req.body.password,
+                password,
                 user.password
             );
 
@@ -70,18 +73,21 @@ const userController = {
 
                 // Cùng lúc đó lưu refreshToken vừa tạo sau khi login vào refreshTokenData[]
                 refreshTokenData.push(refreshToken);
-                console.log("refreshToken in Array: ", refreshTokenData);
-                // lưu refreshToken bằng cookie
-                res.cookie('refreshTokenCookie', refreshToken, {
-                    httpOnly: true,
-                    secure: false,
-                    path: "/",
-                    samSite: "strict"
-                });
-                // lưu vào cookie thì khỏi trả về frontend
-                // res.status(StatusCodes.ACCEPTED).json({user, accessToken, refreshToken});
-                return res.status(StatusCodes.ACCEPTED).json({user, accessToken});
-
+                if(user.role === 'admin'){
+                    res.clearCookie('refreshTokenCookie');
+                    return res.status(StatusCodes.ACCEPTED).json({user, accessToken, role: 'admin'});
+                } else if (user.role === 'staff'){
+                    res.clearCookie('refreshTokenCookie');
+                    return res.status(StatusCodes.ACCEPTED).json({user, accessToken, role: 'staff'});
+                }else {
+                    res.cookie('refreshTokenCookie', refreshToken, {
+                        httpOnly: true,
+                        secure: false,
+                        path: "/",
+                        samSite: "strict"
+                    });
+                    return res.status(StatusCodes.ACCEPTED).json({ user, accessToken, role: "customer" });
+                }
             }
         } catch(err){
             res.status(StatusCodes.BAD_REQUEST).json(err);

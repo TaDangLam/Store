@@ -1,26 +1,35 @@
-import { Inter } from 'next/font/google'
+'use client'
+import { Inter } from 'next/font/google';
+import { usePathname } from 'next/navigation';
+
 import './globals.css'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Header from '@/components/header';
+import Footer from '@/components/footer';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Home',
-  description: 'LK Store',
-}
+// export const metadata = {
+//   title: 'Home',
+//   description: 'LK Store',
+// }
+
+
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const showHeaderAndFooter = !['/auth', '/auth/signup', '/auth/forgotPassword'].includes(pathname);
   return (
     <html lang="en">
       <body className={inter.className}>
         <header className='wrapper'>
-          <Header/>
+          {showHeaderAndFooter && <Header/>}
         </header>
-        <main className='body-cus'>
+        <main className={`${showHeaderAndFooter ? 'body-cus' : ''}`}>
           {children}
         </main>
-        <footer className='footer-cus'><Footer /></footer>
+        <footer className='footer-cus'>
+          {showHeaderAndFooter && <Footer />}
+        </footer>
       </body>
     </html>
   )

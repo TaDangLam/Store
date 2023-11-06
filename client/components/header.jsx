@@ -1,11 +1,21 @@
 'use client'
 import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger } from "react-icons/fa";
-import { BiInfoCircle, BiChevronDown } from "react-icons/bi";
+import { BiInfoCircle, BiChevronDown, BiSolidUserCircle } from "react-icons/bi";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import Link from 'next/link'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+    const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        const userJSON = sessionStorage.getItem('user');
+        if(userJSON){
+            setUser(JSON.parse(userJSON));
+        }
+        
+    }, []);
+    // console.log(user.user.username)
     return(
         <div className="parent-div">
             <div className=" flex items-center justify-between ">
@@ -28,11 +38,21 @@ const Header = () => {
                             <FaSearch />
                     </button>
                 </form> 
-                
-                <div className="flex items-center px-8 gap-10 bg-white">
-                    <div className=""><Link href={'/auth'} className="flex items-center bg-white  hover:text-red-500"><FaUserAlt className="mr-1 "/>Login / Sign Up</Link></div>
-                    <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
-                </div>
+                {user ? (
+                    <div className="flex items-center px-8 gap-10">
+                        <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
+                        <div className="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                            <img src="/images.png" alt="infomation" className="h-5"/>
+                            <Link href={'/information'} className="">{user.user.username}</Link>
+                            <BsFillCaretDownFill />
+                        </div>
+                    </div>
+                ):(
+                    <div className="flex items-center px-8 gap-10 bg-white">
+                        <div className=""><Link href={'/auth'} className="flex items-center bg-white  hover:text-red-500"><FaUserAlt className="mr-1 "/>Login / Sign Up</Link></div>
+                        <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
+                    </div>
+                )}
             </div>
             <div className=" flex gap-10 h-10 items-center ">
                 <div className="text-xl flex gap-2 items-center hover:text-red-500">

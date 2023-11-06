@@ -1,11 +1,13 @@
+'use client'
+
 const Introduce = () => {
     return (
-        <h1 className="bg-slate-100">
+        <div className="bg-slate-100 khang">
             Introduce Page
-            <div className="bg-white border-1 border-rose-600">
-                aaa
+            <div className=" border-1 border-rose-600">
+                
             </div>
-        </h1>
+        </div>
     )
 }
 

@@ -53,7 +53,7 @@ const productController = {
     deleteProduct: async(req, res) => {
         const productID = req.params.id;
         try{
-            const productDoc = await Product.findById(productID);
+            C
             const uploadPath = path.join('./public/uploads/' + productDoc.name);
             if (fs.existsSync(uploadPath)) {
                 // If it exists, delete the folder

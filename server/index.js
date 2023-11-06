@@ -3,6 +3,7 @@ const app = express();
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 import MongoConnect from './lib/mongodb.js';
 import { API_Product } from './routes/productRoute.js';
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static("./public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Router
 app.use('/api/product', API_Product),

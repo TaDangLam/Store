@@ -22,12 +22,20 @@ module.exports = {
       boxShadow: {
         'sm': '-5px 0px 2px 0 rgb(0 0 0 / 0.08)',
         'header': '-1px 7px 0px 0px rgba(0,0,0,0.12)',
+        'login': '-5px 5px 13px 1px rgba(0,0,0,0.49)',
+        'signup': '5px 5px 13px 1px rgba(0,0,0,0.49)'
       },
       colors: {
         'red-cus': '#f7434c',
         'category': '#f7464c',
+        'btn': '#f84c4c',
         'phone': '#ff6600',
         'orange-cus': '#ff8949',
+        'login-left': '#EDF1F4',
+        'login-right': '#C3CBDC',
+        'signup-left': '#FF5F6D',
+        'signup-right': '#FFC371',
+
       },
       spacing: {
         '100': '16.875rem',

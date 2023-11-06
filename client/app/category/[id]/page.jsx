@@ -1,19 +1,41 @@
 'use client'
 import axios from 'axios';
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
 const ApiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
 
+// const quickSort = (arr, sortBy) => {
+//     if (arr.length <= 1) {
+//       return arr;
+//     }
+  
+//     const pivot = arr[0];
+//     const left = [];
+//     const right = [];
+  
+//     for (let i = 1; i < arr.length; i++) {
+//       if (arr[i][sortBy] < pivot[sortBy]) {
+//         left.push(arr[i]);
+//       } else {
+//         right.push(arr[i]);
+//       }
+//     }
+  
+//     return [...quickSort(left, sortBy), pivot, ...quickSort(right, sortBy)];
+//   }
+
 const Category = () => {
     const { id } = useParams();
-    const router = useRouter()
+    const router = useRouter();
     const [nameCategory, setNameCategory] = useState('');
     const [productByCategory, setProductByCategory] = useState([]);
+    // const [sortedProducts, setSortedProducts] = useState([]);
+    // const [sortBy, setSortBy] = useState('');
 
     useEffect(() => {
         axios.get(ApiProduct+`/category/${id}`)
@@ -24,6 +46,15 @@ const Category = () => {
             .then(response => setNameCategory(response.data))
             .catch(err => console.log(err))
     }, [id])
+
+    // useEffect(() => {
+    //     if (productByCategory.length > 0 && sortBy) {
+    //       const sorted = quickSort([...productByCategory], sortBy);
+    //       setSortedProducts(sorted);
+    //     } else {
+    //       setSortedProducts([...productByCategory]);
+    //     }
+    // }, [productByCategory, sortBy]);
 
     const handleBackHome = () => {
         router.push('/');
@@ -54,13 +85,16 @@ const Category = () => {
                             {nameCategory.name}
                         </span>
                     </div>
-                    <select className='h-10 rounded-lg'>
+                    <select 
+                        className='h-10 rounded-lg'
+                        // onChange={(e) => setSortBy(e.target.value)}
+                    >
                         <option value="">Sort</option>
                         <option value="asc">Price: Low to High</option>
                         <option value="desc">Price: High to Low</option>
                     </select>
                 </div>
-                <div className='grid grid-cols-5 grid-rows-5 gap-4  '>
+                <div className='grid grid-cols-5 grid-rows-5 gap-4 '>
                 {productByCategory.map(product => (
                     <Link href={`/productdetail/${product._id}`} className='bg-rose-600 '>
                         <div className='bg-white rounded-pd h-100 w-full'>
