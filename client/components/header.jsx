@@ -13,9 +13,9 @@ const Header = () => {
         if(userJSON){
             setUser(JSON.parse(userJSON));
         }
-        
     }, []);
-    // console.log(user.user.username)
+    // console.log(user.accessToken);
+    console.log(user)
     return(
         <div className="parent-div">
             <div className=" flex items-center justify-between ">
@@ -40,17 +40,17 @@ const Header = () => {
                 </form> 
                 {user ? (
                     <div className="flex items-center px-8 gap-10">
-                        <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
+                        <div><Link href={`/cart/${user?.user._id}`} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
                         <div className="flex items-center gap-1 cursor-pointer hover:text-red-500">
                             <img src="/images.png" alt="infomation" className="h-5"/>
                             <Link href={'/information'} className="">{user.user.username}</Link>
                             <BsFillCaretDownFill />
                         </div>
                     </div>
-                ):(
+                ) : (
                     <div className="flex items-center px-8 gap-10 bg-white">
                         <div className=""><Link href={'/auth'} className="flex items-center bg-white  hover:text-red-500"><FaUserAlt className="mr-1 "/>Login / Sign Up</Link></div>
-                        <div><Link href={'/cart'} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
+                        <div><Link href={`/cart/${user?.user._id}`} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
                     </div>
                 )}
             </div>

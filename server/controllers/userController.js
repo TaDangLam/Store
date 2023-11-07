@@ -58,7 +58,7 @@ const userController = {
                 },
                     process.env.JWT_ACCESS_KEY,
                 {
-                    expiresIn: "15m"
+                    expiresIn: "1d"
                 });
 
                 // refreshToken
