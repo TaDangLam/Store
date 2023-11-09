@@ -40,8 +40,8 @@ const Introduce = () => {
                 <h1 className="text-4xl font-bold text-center">CỬA HÀNG THIẾT BỊ VÀ LINH KIỆN ĐIỆN TỬ </h1>
                 <h1 className="text-4xl font-bold text-center">LK STORE</h1>
             </div>
-            <div className="grid grid-rows-1 my-10 my-24">
-                <div className="grid grid-cols-2 flex items-center animateHidden">
+            <div className="grid grid-rows-1 my-10 ">
+                <div className="grid grid-cols-2 items-center animateHidden">
                     <p className="font-medium text-justify pl-10">
                     Là công ty hoạt động trong lĩnh vực bán lẻ và sửa chữa các sản phẩm công nghệ và lĩnh vực truyền thông giải trí bao gồm 3 công ty thành viên CellphoneS 
                     - Điện thoại vui - Smedia và chuỗi trung tâm bảo hành Apple AASP với quy mô hơn 2.000 nhân viên
@@ -53,7 +53,7 @@ const Introduce = () => {
                 </div>
             </div>
             <div className="grid grid-rows-1 grid-cols-3 my-10 mx-10 gap-4 ">
-                <div className="bg-white rounded-pd h-100 w-full border border-4 rounded-md border-zinc-950 text-ellipsis overflow-hidden animateHidden">
+                <div className="bg-white rounded-pd h-100 w-full border border-4  border-zinc-950 text-ellipsis overflow-hidden animateHidden">
                     <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/cover-p0wrfk6z9h9gj2mzmxldovhtcsa62y19miw3i1k2mq_1.png"
                         className="rounded-md h-48 w-full"/>
                     <h1 className="text-2xl font-bold text-center mt-2" >
@@ -63,7 +63,7 @@ const Introduce = () => {
                         Được xem là 1 trong những Network về YouTube hàng đầu Việt Nam điều hành hơn 18 kênh YouTube chất lượng.
                     </p>
                 </div>
-                <div className="bg-white rounded-pd h-100 w-full border border-4 rounded-md border-zinc-950 text-ellipsis overflow-hidden animateHidden2">
+                <div className="bg-white h-100 w-full border border-4 rounded-pd border-zinc-950 text-ellipsis overflow-hidden animateHidden2">
                     <img src="https://www.homepaylater.vn/static/7558f9c71d6356dedc95925471b4e62e/8b458/cell_phone_s_logo_f626c95055.jpg"
                         className="rounded-md h-48 w-full"/>
                     <h1 className="text-2xl font-bold text-center mt-2" >
@@ -73,7 +73,7 @@ const Introduce = () => {
                     Sau hơn 10 năm vận hành và phát triển không ngừng, hệ thống bán lẻ CellphoneS liên tục mở rộng với chuỗi hơn 100 cửa hàng trên toàn quốc và tự hào là 1 trong 5 hệ thống lớn nhất tại Việt Nam trong lĩnh vực công nghệ.
                     </p>
                 </div>
-                <div className="bg-white rounded-pd h-100 w-full border border-4 rounded-md border-zinc-950 text-ellipsis overflow-hidden animateHidden3">
+                <div className="bg-white rounded-pd h-100 w-full border border-4  border-zinc-950 text-ellipsis overflow-hidden animateHidden3">
                     <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/download_6__1.png"
                         className="rounded-md h-48 w-full"/>
                     <h1 className="text-2xl font-bold text-center mt-2" >

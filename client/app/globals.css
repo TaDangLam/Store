@@ -50,43 +50,29 @@ img {
 }
 
 .animateHidden {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(100%);
-  transition: all 1s;
+  @apply opacity-0 blur translate-y-full transition-all duration-1000 ;
 }
 
 
 .animateHidden2 {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(100%);
-  transition: all 1.25s;
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
 }
 
 .animateHidden3 {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(100%);
-  transition: all 1.5s;
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
 }
 
 .show {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateY(0);
+  @apply opacity-100 blur-none translate-y-0 ;
 }
 
 .textAnimatedHidden {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateX(-100%);
-  transition: all 1s;
+  @apply opacity-0 blur translate-x-full transition-all  duration-1000;
 }
 
 .textAnimatedShow {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateX(0);
+  @apply opacity-100 blur-none translate-x-0 motion-reduce:transition-none;
 }
 
