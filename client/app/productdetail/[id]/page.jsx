@@ -7,11 +7,13 @@ import { BiSkipPreviousCircle, BiSkipNextCircle } from "react-icons/bi";
 const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
 const ApiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
+const ApiCart = process.env.NEXT_PUBLIC_API_CART;
 
 const ProductDetail = () => {
     const { id } = useParams();
     const router = useRouter();
     const [productDetail, setProductDetial] = useState(null);
+    const [user, setUser] = useState(null);
     const [nameCategory, setNameCategory] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [currentImage, setCurrentImage] = useState(0);
@@ -29,6 +31,12 @@ const ProductDetail = () => {
         }
     }, [productDetail])
     
+    useEffect(() => {
+        const userJSON = sessionStorage.getItem('user');
+        if(userJSON){
+            setUser(JSON.parse(userJSON));
+        }
+    }, []);
 
     const handleBackHome = () => {
         router.push('/');
@@ -51,8 +59,22 @@ const ProductDetail = () => {
         }
     }
 
-    const handlePrevent = (e) => {
-        e.preventDefault();
+    const handleAddToCart = async() => {
+        const data = {
+            orderBy: user.user._id,
+            items: [{
+                productID: productDetail._id,
+                amount: quantity
+            }]
+        }
+
+        await axios.post(ApiCart, data, {
+            headers: {
+                token: `Bearer ${user.accessToken}`
+            },
+        })
+        .then(response => console.log('Product add to cart: ', response.data))
+        .catch(err => console.log(err));
     }
 
     const goToPreviousImg = () => {
@@ -70,7 +92,8 @@ const ProductDetail = () => {
     const handleImageClick = (index) => {
         setCurrentImage(index);
     }
-    console.log(productDetail);
+    console.log(user);
+    // console.log(productDetail);
     return(
         <div className='py-4'>
             <div className='flex gap-2 py-6'>
@@ -138,8 +161,9 @@ const ProductDetail = () => {
                                     const value = productDetail?.properties[key];
                                     if(value){
                                         return (
-                                            <li key={key} className='my-1'>
-                                                {`${key}: ${value}`}
+                                            <li key={key} className='my-1 flex items-center gap-2'>
+                                                <div>-</div>
+                                                <div>{`${key}: ${value}`}</div> 
                                             </li>
                                         );
                                 };
@@ -150,15 +174,15 @@ const ProductDetail = () => {
                             <p>Loading...</p>
                         )}
                     </div>
-                    <form className='flex gap-2 py-3 items-center'>
+                    <div className='flex gap-2 py-3 items-center'>
                         <div className='flex h-10 w-24  justify-between'>
                             <button className='bg-btn text-white p-2 rounded-pd' onClick={handleDecreaseQuantity}>-</button>
                             <div className='border-x-2 w-8 text-orange-cus flex items-center justify-center'>{quantity}</div>
                             <button className='bg-btn text-white p-2 rounded-pd' onClick={handleIncreaseQuantity}>+</button>
                         </div>
-                        <button className='bg-btn text-white p-2 rounded-pd' onClick={handlePrevent}>Add To Cart</button>
-                        <button className='bg-btn text-white p-2 rounded-pd' onClick={handlePrevent}>Buy</button>
-                    </form>
+                        <button className='bg-btn text-white p-2 rounded-pd' onClick={handleAddToCart}>Add To Cart</button>
+                        <button className='bg-btn text-white p-2 rounded-pd' >Buy</button>
+                    </div>
                     {/* <div className='bg-sky-300'>Add To Cart</div> */}
                 </div>
             </div>

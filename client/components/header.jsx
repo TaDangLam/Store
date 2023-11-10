@@ -4,6 +4,8 @@ import { BiInfoCircle, BiChevronDown, BiSolidUserCircle } from "react-icons/bi";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import Link from 'next/link'
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
+
 
 const Header = () => {
     const [user, setUser] = useState(null);
@@ -14,8 +16,7 @@ const Header = () => {
             setUser(JSON.parse(userJSON));
         }
     }, []);
-    // console.log(user.accessToken);
-    console.log(user)
+
     return(
         <div className="parent-div">
             <div className=" flex items-center justify-between ">

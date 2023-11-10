@@ -37,7 +37,7 @@ const Signup = () => {
     }
     return(
         <div className="flex bg-gradient-to-r from-login-left to-login-right items-center justify-center h-screen">
-            <div className="flex h-3/4 w-4/5 shadow-signup ">
+            <div className="flex h-3/4 w-4/5 shadow-signup rounded-pd">
                 <div className="flex flex-col items-center justify-center gap-y-5 bg-gradient-to-r from-signup-left to-signup-right h-full w-2/5 rounded-l-pd">
                     <div className="text-4xl text-white font-bold">Hello, Friend!</div>
                     <div className="border-2 w-20 border-white"></div>

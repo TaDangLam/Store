@@ -1,10 +1,21 @@
 'use client'
-
-import NavBar from "@/components/navbar";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
+import NavBar from "@/components/navbar";
+
 export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const userJSON = sessionStorage.getItem('user');
+    if(userJSON){
+        setUser(JSON.parse(userJSON));
+    }
+  }, []);
+  
 
   return (
     <div className="">

@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post(Apilogin, {username, password});
-            const dataLogin = response.data
+            const dataLogin = response.data;
             // console.log(dataLogin)
             if(dataLogin?.role === 'admin'){
                 sessionStorage.setItem('user', JSON.stringify(dataLogin));
@@ -40,8 +40,8 @@ const Login = () => {
     }
     
     return(
-        <div className="flex bg-gradient-to-r from-login-left to-login-right items-center justify-center h-screen">
-            <div className="flex h-3/4 w-4/5 shadow-login ">
+        <div className="flex bg-gradient-to-r from-login-left to-login-right items-center justify-center h-screen ">
+            <div className="flex h-3/4 w-4/5 shadow-login rounded-pd">
                 <div className="bg-white h-full w-3/5 rounded-l-pd flex flex-col gap-y-5">
                     <div className="text-signup-left text-2xl p-4 h-1/5 font-bold cursor-pointer" onClick={handleBackHome}>LK Store</div>
                     <div className=" h-4/5 flex flex-col items-center gap-2">

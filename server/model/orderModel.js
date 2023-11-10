@@ -8,16 +8,15 @@ const orderSchema = new mongoose.Schema({
         ref: 'User',
     },
     totalPrice: {
-        type: String, 
+        type: Number, 
         required: true,
     },
-    createDate: {
-        type: Date, 
-        required: true,
-    },
+    // createDate: {
+    //     type: Date, 
+    //     required: true,
+    // },
     discount: {
-        type: String, 
-        required: true,
+        type: String,
     },
     itemTotalPrice: {
         type: Number, 
