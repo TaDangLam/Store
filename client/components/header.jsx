@@ -16,7 +16,7 @@ const Header = () => {
             setUser(JSON.parse(userJSON));
         }
     }, []);
-
+    // console.log(user);
     return(
         <div className="parent-div">
             <div className=" flex items-center justify-between ">

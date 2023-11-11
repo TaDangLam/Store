@@ -13,7 +13,7 @@ const CartPage = () => {
     const { idUser } = useParams();
     const [cartData, setCartData] = useState(null);
     const [user, setUser] = useState(null);
-    const [quantities, setQuantities] = useState({}); 
+    const [quantities, setQuantities] = useState({});
     const [productPrice, setProductPrice] = useState({});
     const [total, setTotal] = useState(0);
 
@@ -45,7 +45,15 @@ const CartPage = () => {
                 token: `Bearer ${user.accessToken}`
             },
         })
-        .then(result => setCartData(result.data))
+        .then(result => {
+            const defaultQuantities = {};
+            result.data.items.forEach(cartItem => {
+                defaultQuantities[cartItem.productID._id] = 1;
+            });
+            setCartData(result.data);
+            setQuantities(defaultQuantities);
+            caculateTotal();
+        })
         .catch(err => console.log(err))
     }
 
@@ -101,10 +109,27 @@ const CartPage = () => {
         }
     }
 
+    const handlePay = async() => {
+        try {
+            const updateItem = cartData.items.map((item) => ({
+                productID: item.productID._id,
+                amount: quantities[item.productID._id] || 1,
+            }));
+            await axios.patch(Apicart + `/${idUser}`, updateItem, {
+                headers: {
+                    token: `Bearer ${user.accessToken}`
+                },
+            });
+            router.push(`/checkout/${user.user._id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="flex flex-col py-5">
             <div className="text-2xl flex items-center w-full h-1/4 mb-4">Cart</div>
-            <form className=" flex gap-2 w-full h-3/4">
+            <div className=" flex gap-2 w-full h-3/4">
                 <div className="flex flex-col bg-white h-full w-9/12 px-4 py-1.5 rounded-lg">
                     <div className="flex border-y-2 items-center gap-16 w-full h-1/3"> 
                     {/* gap-x-20 */}
@@ -137,16 +162,16 @@ const CartPage = () => {
                 <div className="flex flex-col gap-1 bg-white h-full w-3/12 p-2.5 rounded-lg">
                     <div className="flex items-center w-full h-1/2 justify-between">
                         <div>Total:</div>
-                        <div className="">{total || 0}</div>
+                        <div className="">{total}</div>
                     </div>
                     <div className="flex items-center gap-4 w-full h-1/2 justify-between ">
                         <Link href={'/'} className="text-signup-left outline outline-offset-2 outline-1 rounded-full p-1 w-3/5 text-center">
                             Continue Shopping
                         </Link>
-                        <button className="rounded-full py-1.5 w-2/5 bg-gradient-to-r from-signup-left to-signup-right text-white">Pay</button>
+                        <button onClick={handlePay} className="rounded-full py-1.5 w-2/5 bg-gradient-to-r from-signup-left to-signup-right text-white">Pay</button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

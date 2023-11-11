@@ -1,6 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { Order } from '../model/orderModel.js';
+import { Product } from '../model/productModel.js';
 
 const orderController = {
     
@@ -59,15 +60,36 @@ const orderController = {
         }
     },
 
+    //update quantity product
+    updateProductQuantity: async (productId, quantity) => {
+        try {
+            const product = await Product.findById(productId);
+    
+            if (product) {
+                // Giảm số lượng sản phẩm
+                product.amount -= quantity;
+    
+                // Lưu sản phẩm đã cập nhật
+                await product.save();
+            }
+        } catch (err) {
+            console.error('Error updating product quantity:', err);
+        }
+    },
+
     // Create Order
     addOrder: async(req, res) => {
         try {
-            const {userID, totalPrice, createDate, discount, itemTotalPrice, shippingFee, status, items} = req.body;
-            console.log(req.body);
+            const {orderBy, totalPrice, itemTotalPrice, status, items} = req.body;
+            // console.log(req.body);
             const orderDoc = await Order.create({
-                userID, totalPrice, createDate, discount, itemTotalPrice, shippingFee, status, 
+                orderBy, totalPrice, createDate, discount, itemTotalPrice, status: 'Processing', 
                 items: items || []
             });
+
+            for(const item of items){
+                await updateProductQuantity(item.productId, item.amount);
+            }
             res.status(StatusCodes.CREATED).json(orderDoc);
         }catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

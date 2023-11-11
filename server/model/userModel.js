@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema ({
     birth: {
         type: Date
     },
+    address: {
+        type: String,
+    },
+    province: {
+        type: String,
+    },
     username: {
         type: String,
         required: true,

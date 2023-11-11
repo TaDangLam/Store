@@ -176,7 +176,7 @@ const userController = {
 
     //update user
     updateUser: async(req, res) => {
-        const { name, email, birth, username, password, phone } = req.body;
+        const { name, email, birth, username, password, phone, province} = req.body;
         const userID = req.params.id;
         try {
             const salt = await bcrypt.genSalt(10);
@@ -188,6 +188,7 @@ const userController = {
                 username, 
                 password: hashed, 
                 phone,
+                province
             });
             return res.status(StatusCodes.OK).json(userData);
         } catch (err) {

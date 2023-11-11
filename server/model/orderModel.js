@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const orderStatusEnum = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
 
 const orderSchema = new mongoose.Schema({
-    userID: {
+    orderBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
@@ -11,21 +11,21 @@ const orderSchema = new mongoose.Schema({
         type: Number, 
         required: true,
     },
-    // createDate: {
-    //     type: Date, 
-    //     required: true,
-    // },
-    discount: {
+    note: {
         type: String,
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart',
     },
     itemTotalPrice: {
         type: Number, 
         required: true,
     },
-    shippingFee: {
-        type: Number, 
-        required: true,
-    },
+    // shippingFee: {
+    //     type: Number, 
+    //     required: true,
+    // },
     status: {
         type: String,
         enum: orderStatusEnum,
@@ -33,7 +33,7 @@ const orderSchema = new mongoose.Schema({
     },
     items: [
         {
-            product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+            productID: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
             amount: {type: Number, required: true, min: 1}, 
         }
     ],

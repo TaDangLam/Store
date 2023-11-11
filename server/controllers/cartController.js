@@ -65,20 +65,23 @@
 
         updateCart: async(req, res) => {
             try {
-                const cartID = req.params.id;    
-                const update = req.body;
+                const userID = req.params.id;    
+                const updateItems = req.body;
 
                 // tìm giỏ hàng theo id cart
-                const cart = await Cart.findById(cartID);
+                const cart = await Cart.findOne({ orderBy: userID });
 
                 if(!cart){
                     return res.status(StatusCodes.NOT_FOUND).json('Cart not found');
                 };
 
-                // cập nhật items trong giỏ hàng
-                if(update.items){
-                    cart.items = update.items;
-                };
+                // Cập nhật số lượng cho từng sản phẩm
+                updateItems.forEach((updateItem) => {
+                    const cartItem = cart.items.find(item => item.productID.toString() === updateItem.productID);
+                    if (cartItem) {
+                        cartItem.amount = updateItem.amount;
+                    }
+                });
 
                 // lưu sau khi cập nhật
                 const updateCart = await cart.save();

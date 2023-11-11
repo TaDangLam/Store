@@ -64,7 +64,7 @@ const ProductDetail = () => {
             orderBy: user.user._id,
             items: [{
                 productID: productDetail._id,
-                amount: quantity
+                amount: 1
             }]
         }
 

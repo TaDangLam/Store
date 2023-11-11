@@ -8,6 +8,7 @@ const apiUser = process.env.NEXT_PUBLIC_API_LOG_OUT;
 
 const InfomationPage = () => {
     const router = useRouter();
+    
     const handleLogout = async() => {
         try {
             const result = await axios.post(apiUser);
