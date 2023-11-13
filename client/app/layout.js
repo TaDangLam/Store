@@ -17,7 +17,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const showHeaderAndFooter = !['/auth', '/auth/signup', '/auth/forgotPassword', '/dashboard'].includes(pathname);
+  // const url = ['/auth', '/auth/signup', '/auth/forgotPassword', '/dashboard', '/dashboard/user', '/dashboard/order', '/dashboard/product', '/dashboard/category', '/dashboard/product/edit/a', '/dashboard/product/delete'];
+  // const showHeaderAndFooter = !url.includes(pathname);
+  const isAuthOrDashboardPage = pathname.startsWith('/auth') || pathname.startsWith('/dashboard');
+  const showHeaderAndFooter = !isAuthOrDashboardPage;
   return (
     <html lang="en">
       <body className={inter.className}>

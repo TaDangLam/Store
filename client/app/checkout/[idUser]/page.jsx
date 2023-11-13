@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 
 const Apicart = process.env.NEXT_PUBLIC_API_CART;
+const Apiuser = process.env.NEXT_PUBLIC_API_USER;
+const Apiorder = process.env.NEXT_PUBLIC_API_ORDER;
 
 const CheckoutPage = () => {
     const router = useRouter();
@@ -76,9 +78,48 @@ const CheckoutPage = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const updateUserInfo = async() => {
+        try {
+            axios.patch(Apiuser + `/${user.user._id}`, {
+                email,
+                name,
+                address,
+                province,
+                phone,
+            }, {
+                headers: {
+                    token: `Bearer ${user.accessToken}`
+                },
+            });
+        } catch (err) {
+            console.error('Error Updating User: ', err);
+        }
+    }
+
+    const handleSubmit = async(e) => {
         e.preventDefault();
         
+        await updateUserInfo();
+        try {
+            const response = axios.post(Apiorder, {
+                orderBy: user.user._id,
+                totalPrice: total,
+                status: 'Processing',
+                items: cartData.items.map(cartItem => (
+                    {
+                        productID: cartItem.productID._id,
+                        amount: cartItem.amount,
+                    }
+                )),
+            }, {
+                headers: {
+                    token: `Bearer ${user.accessToken}`
+                },
+            });
+            console.log(response.data);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const backPageCart = () => {
@@ -123,7 +164,7 @@ const CheckoutPage = () => {
                             <div className="h-full w-2/12 text-xl font-medium">{total}</div>
                         </div>
                     </div>
-                    <button className="w-full h-1/5 bg-rose-500 p-2 text-white rounded-lg hover:bg-rose-800">Order</button>
+                    <button type="submit" className="w-full h-1/5 bg-rose-500 p-2 text-white rounded-lg hover:bg-rose-800">Order</button>
                 </div>
             </form>
         </div>

@@ -94,9 +94,9 @@ const Category = () => {
                         <option value="desc">Price: High to Low</option>
                     </select>
                 </div>
-                <div className='grid grid-cols-5 grid-rows-5 gap-4 '>
+                <div className='grid grid-cols-5 grid-rows-5 gap-5 '>
                 {productByCategory.map(product => (
-                    <Link href={`/productdetail/${product._id}`} className='bg-rose-600 '>
+                    <Link href={`/productdetail/${product._id}`} className=' '>
                         <div className='bg-white rounded-pd h-100 w-full'>
                                 <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-full h-4/6 object-cover'/>
                                 <div className='h-1/6 text-sm text-center mt-0'>{product.name}</div>

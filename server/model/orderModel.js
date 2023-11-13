@@ -31,12 +31,7 @@ const orderSchema = new mongoose.Schema({
         enum: orderStatusEnum,
         default: 'Pending',
     },
-    items: [
-        {
-            productID: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-            amount: {type: Number, required: true, min: 1}, 
-        }
-    ],
+
     paymentID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Payment',
