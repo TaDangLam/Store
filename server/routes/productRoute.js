@@ -5,9 +5,24 @@ import path from 'path';
 import fs from 'fs';
 
 import productController from '../controllers/productController.js';
+import { Product } from '../model/productModel.js';
 
 const storage = multer.diskStorage({
-    destination: function (req, images, cb) {
+    destination: async function (req, images, cb) {
+
+        const productName = req.body.name ;
+        // When update, if there is a change in the product's name, rename the product's upload folder's name either
+        if(req.params.id){
+            const productID = req.params.id;
+            const productDoc = await Product.findById(productID);
+            if(req.body.name !== productDoc.name){
+                const oldUploadPath = path.join('./public/uploads/' + productDoc.name);
+                const newUploadPath = path.join('./public/uploads/' + productName);
+                if (fs.existsSync(oldUploadPath)) {
+                    fs.renameSync(oldUploadPath, newUploadPath);
+                }
+            }
+        }
 
         // Create a new product's images directory if it doesn't already exist
         const uploadPath = path.join('./public/uploads/' + req.body.name);

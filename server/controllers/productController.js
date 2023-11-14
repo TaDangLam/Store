@@ -31,7 +31,7 @@ const productController = {
     getProductByCategory: async(req, res) => {
         const categoryID = req.params.id;
         try {
-            const data = await Product.find({ categories: categoryID});
+            const data = await Product.find({ categories: categoryID });
             res.status(StatusCodes.OK).json(data);
         } catch(err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -53,7 +53,7 @@ const productController = {
     deleteProduct: async(req, res) => {
         const productID = req.params.id;
         try{
-            C
+            const productDoc = await Product.findById(productID);
             const uploadPath = path.join('./public/uploads/' + productDoc.name);
             if (fs.existsSync(uploadPath)) {
                 // If it exists, delete the folder
@@ -74,7 +74,7 @@ const productController = {
         const productID = req.params.id;
         const { name, properties, price, amount, images} = req.body;
         try {
-            const productDoc = await Product.findByIdAndUpdate(productID, { name, properties, price, amount, images}, {new: true});
+            const productDoc = await Product.findByIdAndUpdate(productID, { name, properties, price, amount, images: images || []}, {new: true});
             res.status(StatusCodes.OK).json(productDoc);
         }catch(err) {
             console.log(err);
