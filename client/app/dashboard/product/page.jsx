@@ -7,16 +7,23 @@ const apiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 
 const Product = () => {
     const [dataProduct, setDataProduct] = useState([]);
+    const [user, setUser] = useState(null);
+
 
     const border1 = 'border border-slate-400';
     const border2 = border1 + ' font-semibold text-xl';
     useEffect(() => {
+        const userJSON = sessionStorage.getItem('user');
+        if(userJSON){
+            setUser(JSON.parse(userJSON));
+        }
         axios.get(apiProduct)
         .then(result => setDataProduct(result.data))
         .catch(err => console.log(err));
     }, []);
 
-    console.log(dataProduct);
+
+    console.log(user);
     return (
         <div className="">
             <Link href={"/dashboard/product/new"} className="bg-blue-900 text-white rounded-md py-1 px-2 " >Add new product</Link>

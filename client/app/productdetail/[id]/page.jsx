@@ -157,18 +157,15 @@ const ProductDetail = () => {
                     <div className=''>
                         {productDetail ? (
                             <ul className='properties-product'>
-                                {Object.keys(productDetail.properties).map((key) => {
-                                    const value = productDetail?.properties[key];
-                                    if(value){
-                                        return (
-                                            <li key={key} className='my-1 flex items-center gap-2'>
-                                                <div>-</div>
-                                                <div>{`${key}: ${value}`}</div> 
-                                            </li>
-                                        );
-                                };
-                                return null;
-                            })}
+                                {productDetail.properties.map((prop, index) => (
+                                    <li key={index} className='my-1 flex items-center gap-2'>
+                                        <div>-</div>
+                                        <div className='flex gap-2'>
+                                            <p>{`${prop.key}: `}</p>
+                                            <p>{`${prop.value}`}</p>
+                                        </div>
+                                    </li>
+                                ))}
                             </ul>
                         ) : (
                             <p>Loading...</p>

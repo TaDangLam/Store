@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 const Navbar = () => {
     const pathname = usePathname();
     const inactiveLink = 'flex items-center gap-2 rounded-l-lg pl-2'
-    const active = inactiveLink + ' bg-white text-blue-900';
+    const active = inactiveLink + ' bg-slate-100 text-blue-900';
     
     
     return (
