@@ -25,13 +25,14 @@ const storage = multer.diskStorage({
         }
 
         // Create a new product's images directory if it doesn't already exist
-        const uploadPath = path.join('./public/uploads/' + req.body.name);
+        const uploadPath = path.join('./public/uploads/' + productName);
         if (!fs.existsSync(uploadPath)){
             fs.mkdirSync(uploadPath);
         }
-
+        
         // Find all the images thats not included in the form-data and delete them
         req.body.images = req.body.images || [];
+
         const existingImages = fs.readdirSync(uploadPath);
         const imagesToDelete = existingImages.filter((image) => 
             !req.body.images.includes(image)
@@ -45,8 +46,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, images, cb) {
         const filename = images.originalname;
-        req.body.images?.push(filename); 
-        console.log(req.body.images);
+        req.body.images.push(filename); 
         cb(null, filename);
     }
 });

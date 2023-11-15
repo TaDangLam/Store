@@ -16,8 +16,12 @@ const userController = {
             // create new user in database
             const newUser = await new User({
                 username: req.body.username,
-                email: req.body.email,
                 password: hashed,
+                email: req.body.email,
+                name: req.body.name,
+                address: req.body.address,
+                province: req.body.province,
+                phone: req.body.phone,
             });
 
             // save to DB
@@ -163,6 +167,17 @@ const userController = {
         }
     },
 
+    //get User By Id
+    getUserById: async(req, res) => {
+        const userId = req.params.id;
+        try {
+            const user = await User.findById(userId);
+            res.status(StatusCodes.OK).json(user);
+        } catch (err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
+
     //delete User
     deleteUser: async(req, res) => {
         try {
@@ -176,20 +191,19 @@ const userController = {
 
     //update user
     updateUser: async(req, res) => {
-        const { name, email, birth, username, password, phone, province} = req.body;
+        const { name, email, username, password, phone, province} = req.body;
         const userID = req.params.id;
         try {
             const salt = await bcrypt.genSalt(10);
             const hashed = await bcrypt.hash(password, salt);
             const userData = await User.findByIdAndUpdate(userID, { 
                 name, 
-                email, 
-                birth, 
+                email,
                 username, 
                 password: hashed, 
                 phone,
                 province
-            });
+            }, {new: true});
             return res.status(StatusCodes.OK).json(userData);
         } catch (err) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

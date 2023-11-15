@@ -168,7 +168,7 @@ const CartPage = () => {
                         <Link href={'/'} className="text-signup-left outline outline-offset-2 outline-1 rounded-full p-1 w-3/5 text-center">
                             Continue Shopping
                         </Link>
-                        <button onClick={handlePay} className="rounded-full py-1.5 w-2/5 bg-gradient-to-r from-signup-left to-signup-right text-white">Pay</button>
+                        <button onClick={handlePay} className="rounded-full py-1.5 w-2/5 bg-gradient-to-r from-signup-left to-signup-right text-white">Check Out</button>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@ const CheckoutPage = () => {
     const router = useRouter();
     const { idUser } = useParams();
     const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -32,6 +33,9 @@ const CheckoutPage = () => {
     console.log(user);
     useEffect(() => {
         getUserFromSessionStorage();
+        axios.get(Apiuser + `${idUser}`)
+            .then(result => setUserData(result.data))
+            .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
@@ -96,12 +100,13 @@ const CheckoutPage = () => {
         }
     }
 
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         
-        await updateUserInfo();
+        
         try {
-            const response = axios.post(Apiorder, {
+            const response = await axios.post(Apiorder, {
                 orderBy: user.user._id,
                 totalPrice: total,
                 status: 'Processing',
@@ -125,6 +130,8 @@ const CheckoutPage = () => {
     const backPageCart = () => {
         router.back();
     }
+    // console.log({email, phone, address, province, name});
+    
     
     return( 
         <div className="flex flex-col gap-8 w-full h-full py-8">
@@ -164,6 +171,7 @@ const CheckoutPage = () => {
                             <div className="h-full w-2/12 text-xl font-medium">{total}</div>
                         </div>
                     </div>
+                    <div className="px-7">aa</div>
                     <button type="submit" className="w-full h-1/5 bg-rose-500 p-2 text-white rounded-lg hover:bg-rose-800">Order</button>
                 </div>
             </form>

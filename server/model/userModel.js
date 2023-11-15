@@ -9,9 +9,6 @@ const userSchema = new mongoose.Schema ({
     email: {
         type: String,
     },
-    birth: {
-        type: Date
-    },
     address: {
         type: String,
     },
