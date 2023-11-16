@@ -92,7 +92,7 @@ const EditProduct = () => {
       await axios.patch(apiProduct + `/${product._id}`, formData);
     };
   
-    console.log(properties);
+    // console.log(properties);
     return (
       <div>
         <div className="flex item-center gap-4">

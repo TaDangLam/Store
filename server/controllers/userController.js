@@ -160,7 +160,7 @@ const userController = {
     //Get All User
     getAllUser: async(req, res) => {
         try {
-            const userData = await User.find();
+            const userData = await User.find({ role: 'customer' });
             res.status(StatusCodes.OK).json(userData);
         } catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -182,7 +182,7 @@ const userController = {
     deleteUser: async(req, res) => {
         try {
             const userID = req.params.id;
-            const userData = await User.findByIdAndDelete(userID);
+            await User.findByIdAndDelete(userID);
             res.status(StatusCodes.OK).json("User is Deleted");
         } catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

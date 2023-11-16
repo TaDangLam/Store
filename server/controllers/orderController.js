@@ -60,41 +60,43 @@ const orderController = {
         }
     },
 
-    //update quantity product
-    updateProductQuantity: async (productId, quantity) => {
-        try {
-            const product = await Product.findById(productId);
-    
-            if (product) {
-                // Giảm số lượng sản phẩm
-                product.amount -= quantity;
-    
-                // Lưu sản phẩm đã cập nhật
-                await product.save();
+    updateProductQuantities: async (items) => {
+        try{
+            for (const item of items) {
+                const product = await Product.findById(item.productID);
+                console.log(product);
+                //Kiểm tra nếu có đủ số lượng để giảm
+                if (product.amount >= item.amount) {
+                    product.amount -= item.amount;
+                    await product.save();
+                }else {
+                    // Xử lý trường hợp không đủ số lượng trong kho
+                    console.log(`Not enough stock for product ${product._id}`);
+                }
             }
-        } catch (err) {
-            console.error('Error updating product quantity:', err);
+        }
+        catch (err) {
+            console.error('Error in updateProductQuantities:', err);
+            throw err;
         }
     },
-
     // Create Order
     addOrder: async(req, res) => {
         try {
-            const {orderBy, totalPrice, itemTotalPrice, status, items} = req.body;
-            // console.log(req.body);
+            const { orderBy, totalPrice,statusOrder, items } = req.body;
+            // console.log('Before updateProductQuantities');
+            await orderController.updateProductQuantities(items);
+            // console.log('After updateProductQuantities');
             const orderDoc = await Order.create({
-                orderBy, totalPrice, createDate, discount, itemTotalPrice, status: 'Processing', 
-                items: items || []
+                orderBy, totalPrice, statusOrder, items: items || []
             });
-
-            for(const item of items){
-                await updateProductQuantity(item.productId, item.amount);
-            }
+            // console.log(orderDoc);
             res.status(StatusCodes.CREATED).json(orderDoc);
-        }catch(err){
+        } catch (err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
+
 
     // Delete Order
     deleteOrder: async(req, res) => {

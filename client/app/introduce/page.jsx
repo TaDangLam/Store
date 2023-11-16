@@ -35,25 +35,25 @@ const Introduce = () => {
         hiddenElements2.forEach((el) => observer2.observe(el));
     }, []);
     return (
-        <h1 className="bg-slate-100 py-5 ">
-            <div className="bg-slate-100 border-1 border-rose-600 animateHidden ">
+        <h1 className="py-5 ">
+            <div className=" border-1 border-rose-600 animateHidden ">
                 <h1 className="text-4xl font-bold text-center">CỬA HÀNG THIẾT BỊ VÀ LINH KIỆN ĐIỆN TỬ </h1>
                 <h1 className="text-4xl font-bold text-center">LK STORE</h1>
             </div>
             <div className="grid grid-rows-1 my-10 my-24">
-                <div className="grid grid-cols-2 flex items-center animateHidden">
+                <div className="grid grid-cols-2  items-center animateHidden">
                     <p className="font-medium text-justify pl-10">
                     Là công ty hoạt động trong lĩnh vực bán lẻ và sửa chữa các sản phẩm công nghệ và lĩnh vực truyền thông giải trí bao gồm 3 công ty thành viên CellphoneS 
                     - Điện thoại vui - Smedia và chuỗi trung tâm bảo hành Apple AASP với quy mô hơn 2.000 nhân viên
                     </p>
                     <div className="flex items-center justify-center">
                         <img src="/logo.jpg" 
-                            className="w-96 text-center rounded-md"/>
+                            className="w-96 text-center rounded-full"/>
                     </div>
                 </div>
             </div>
             <div className="grid grid-rows-1 grid-cols-3 my-10 mx-10 gap-4 ">
-                <div className="bg-white rounded-pd h-100 w-full border border-4 rounded-md border-zinc-950 text-ellipsis overflow-hidden animateHidden">
+                <div className="bg-white  h-100 w-full border border-4 rounded-md border-zinc-950 text-ellipsis overflow-hidden animateHidden">
                     <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:80/plain/https://cellphones.com.vn/media/wysiwyg/cover-p0wrfk6z9h9gj2mzmxldovhtcsa62y19miw3i1k2mq_1.png"
                         className="rounded-md h-48 w-full"/>
                     <h1 className="text-2xl font-bold text-center mt-2" >

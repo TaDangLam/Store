@@ -30,26 +30,30 @@ const CheckoutPage = () => {
             setUser(JSON.parse(userJSON));
         }
     };
-    console.log(user);
+    // console.log(user);
     useEffect(() => {
         getUserFromSessionStorage();
-        axios.get(Apiuser + `${idUser}`)
-            .then(result => setUserData(result.data))
-            .catch(err => console.log(err));
     }, []);
 
+    // console.log(userData)
     useEffect(() => {
         callApi();
     }, [idUser, user])
 
     useEffect(() => {
-        console.log(productPrices)
-        console.log(total)
         calculateProductPrices();
     }, [quantities, cartData])
 
-    const callApi = () => {
-        axios.get(Apicart + `/${idUser}`, {
+    useEffect(() => {
+        setEmail(user?.user.email);
+        setName(user?.user.name);
+        setAddress(user?.user.address);
+        setProvince(user?.user.province);
+        setPhone(user?.user.phone);
+     }, [user]);
+
+    const callApi = async() => {
+        await axios.get(Apicart + `/${idUser}`, {
             headers: {
                 token: `Bearer ${user?.accessToken}`
             },
@@ -82,25 +86,6 @@ const CheckoutPage = () => {
         }
     }
 
-    const updateUserInfo = async() => {
-        try {
-            axios.patch(Apiuser + `/${user.user._id}`, {
-                email,
-                name,
-                address,
-                province,
-                phone,
-            }, {
-                headers: {
-                    token: `Bearer ${user.accessToken}`
-                },
-            });
-        } catch (err) {
-            console.error('Error Updating User: ', err);
-        }
-    }
-
-
     const handleSubmit = async(e) => {
         e.preventDefault();
         
@@ -116,10 +101,6 @@ const CheckoutPage = () => {
                         amount: cartItem.amount,
                     }
                 )),
-            }, {
-                headers: {
-                    token: `Bearer ${user.accessToken}`
-                },
             });
             console.log(response.data);
         } catch (err) {
@@ -144,11 +125,11 @@ const CheckoutPage = () => {
                 <div className="flex flex-col gap-8 bg-white w-3/6 px-3 py-6 h-full rounded-xl">  
                     <div className="w-full text-btn text-2xl font-bold h-1/3">Payment Information</div>
                     <div className="flex flex-col gap-5 w-full h-2/3">
-                        <div className="w-full h-1/5 border py-2 px-3.5 "><input onChange={(e) => setEmail(e.target.value)} value={email} className="w-full h-full outline-none" type="text" placeholder="Email"/></div>
-                        <div className="w-full h-1/5 border py-2 px-3.5"><input onChange={(e) => setName(e.target.value)} value={name} className="w-full h-full outline-none" type="text" placeholder="Name"/></div>
-                        <div className="w-full h-1/5 border py-2 px-3.5"><input onChange={(e) => setAddress(e.target.value)} value={address} className="w-full h-full outline-none" type="text" placeholder="Address"/></div>
-                        <div className="w-full h-1/5 border py-2 px-3.5"><input onChange={(e) => setProvince(e.target.value)} value={province} className="w-full h-full outline-none" type="text" placeholder="Province"/></div>
-                        <div className="w-full h-1/5 border py-2 px-3.5"><input onChange={(e) => setPhone(e.target.value)} value={phone} className="w-full h-full outline-none" type="text" placeholder="Phone"/></div>
+                        <div className="w-full h-1/5 border py-2 px-3.5 "><input readOnly onChange={(e) => setEmail(e.target.value)} value={email} className="w-full h-full outline-none" type="text" placeholder="Email"/></div>
+                        <div className="w-full h-1/5 border py-2 px-3.5"><input readOnly onChange={(e) => setName(e.target.value)} value={name} className="w-full h-full outline-none" type="text" placeholder="Name"/></div>
+                        <div className="w-full h-1/5 border py-2 px-3.5"><input readOnly onChange={(e) => setAddress(e.target.value)} value={address} className="w-full h-full outline-none" type="text" placeholder="Address"/></div>
+                        <div className="w-full h-1/5 border py-2 px-3.5"><input readOnly onChange={(e) => setProvince(e.target.value)} value={province} className="w-full h-full outline-none" type="text" placeholder="Province"/></div>
+                        <div className="w-full h-1/5 border py-2 px-3.5"><input readOnly onChange={(e) => setPhone(e.target.value)} value={phone} className="w-full h-full outline-none" type="text" placeholder="Phone"/></div>
                     </div>
                 </div>
                 <div className="flex flex-col gap-8 bg-white w-3/6 rounded-xl px-4 py-6 h-full border-2 border-rose-600">
@@ -171,7 +152,6 @@ const CheckoutPage = () => {
                             <div className="h-full w-2/12 text-xl font-medium">{total}</div>
                         </div>
                     </div>
-                    <div className="px-7">aa</div>
                     <button type="submit" className="w-full h-1/5 bg-rose-500 p-2 text-white rounded-lg hover:bg-rose-800">Order</button>
                 </div>
             </form>

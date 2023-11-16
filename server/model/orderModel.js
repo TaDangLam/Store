@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const orderStatusEnum = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+const orderStatusEnum = ['Processing', 'Cancelled'];
 
 const orderSchema = new mongoose.Schema({
     orderBy: {
@@ -18,10 +18,17 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart',
     },
-    itemTotalPrice: {
-        type: Number, 
-        required: true,
-    },
+    items: [
+        {
+            _id: false,
+            productID: String,
+            amount: Number
+        }
+    ],
+    // itemTotalPrice: {
+    //     type: Number, 
+    //     required: true,
+    // },
     // shippingFee: {
     //     type: Number, 
     //     required: true,
@@ -29,7 +36,7 @@ const orderSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: orderStatusEnum,
-        default: 'Pending',
+        default: 'Processing',
     },
 
     paymentID: {

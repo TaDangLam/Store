@@ -97,6 +97,22 @@ const productController = {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
+
+    //search 4 project new
+    getNewestProductsByCategory: async (req, res) => {
+        try {
+            const categoryId = req.params.categoryId;
+             
+            
+            const products = await Product.find({ categories: categoryId })
+                .sort({ createdAt: -1 })
+                .limit(4);
+    
+            res.status(StatusCodes.OK).json(products);
+        } catch (err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
 }
 
 export default productController;

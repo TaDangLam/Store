@@ -60,6 +60,6 @@ Router.get('/:id', productController.getProductDetail);
 Router.get('/category/:id', productController.getProductByCategory)
 Router.patch('/:id', upload.any(), productController.updateProduct);
 Router.delete('/:id', productController.deleteProduct);
-
+Router.get('/home/:categoryId', productController.getNewestProductsByCategory);
 
 export const API_Product = Router;

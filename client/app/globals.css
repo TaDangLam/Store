@@ -18,7 +18,7 @@ img {
 }
 
 .body-cus{  
-  @apply px-36 bg-slate-200;
+  @apply px-36 bg-slate-200 pb-10 pt-1;
 }
 
 .footer-cus{
@@ -47,4 +47,31 @@ img {
 
 .properties-product li {
   @apply text-gray-500;
+}
+
+.animateHidden {
+  @apply opacity-0 blur translate-y-full transition-all duration-1000 ;
+}
+
+
+.animateHidden2 {
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
+}
+
+.animateHidden3 {
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
+}
+
+.show {
+  @apply opacity-100 blur-none translate-y-0 ;
+}
+
+.textAnimatedHidden {
+  @apply opacity-0 blur translate-x-full transition-all  duration-1000;
+}
+
+.textAnimatedShow {
+  @apply opacity-100 blur-none translate-x-0 motion-reduce:transition-none;
 }
