@@ -5,13 +5,13 @@ import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
     const pathname = usePathname();
-    const inactiveLink = 'flex items-center gap-2 rounded-l-lg pl-2'
-    const active = inactiveLink + ' bg-slate-100 text-blue-900';
+    const inactiveLink = 'flex items-center gap-2 rounded-l-pd pl-3.5  hover:bg-slate-400 hover:text-white'
+    const active = inactiveLink + ' bg-slate-100 text-blue-900 ';
     
     
     return (
         <div className="text-white p-4 pr-0 flex flex-col gap-4 ">
-            <Link href={'/dashboard'} className="font-medium flex gap-2 items-center mb-3 mr-2">
+            <Link href={'/dashboard'} className="font-medium flex gap-2 items-center mb-3 mr-2 pl-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

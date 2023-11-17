@@ -69,7 +69,7 @@ const Signup = () => {
                         <form onSubmit={handleRegister} className="my-5 flex flex-col items-center gap-4 w-full">
                             <div className="flex gap-2 w-full px-3">
                                 <div className="flex flex-col w-1/3  gap-5">
-                                    <div className="flex items-center gap-2 w-72 p-3 bg-slate-100 w-full">
+                                    <div className="flex items-center gap-2  p-3 bg-slate-100 w-full">
                                         <AiOutlineMail className="w-1/12"/>
                                         <input 
                                         type="text" 
@@ -79,7 +79,7 @@ const Signup = () => {
                                         onChange={(e) => setUsername(e.target.value)}
                                         />
                                     </div>
-                                    <div className="flex items-center gap-2 w-72 p-3 bg-slate-100 w-full">
+                                    <div className="flex items-center gap-2  p-3 bg-slate-100 w-full">
                                         <AiOutlineLock className="w-1/12"/>
                                         <input 
                                         type="password" 
@@ -89,7 +89,7 @@ const Signup = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
-                                    <div className="flex items-center gap-2 w-72 p-3 bg-slate-100 w-full">
+                                    <div className="flex items-center gap-2  p-3 bg-slate-100 w-full">
                                         <AiOutlineLock className="w-1/12"/>
                                         <input 
                                         type="password" 

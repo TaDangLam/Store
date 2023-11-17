@@ -5,10 +5,10 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    parentCategory: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-    },
+    // parentCategory: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Category',
+    // },
 }, {
     timestamps: true
 })

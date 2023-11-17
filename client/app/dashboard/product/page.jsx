@@ -26,7 +26,7 @@ const Product = () => {
     console.log(user);
     return (
         <div className="">
-            <Link href={"/dashboard/product/new"} className="bg-blue-900 text-white rounded-md py-1 px-2 " >Add new product</Link>
+            <Link href={"/dashboard/product/new"} className="bg-blue-900 text-white rounded-md py-1 px-2 " >Add New Product</Link>
             <table className={`table-auto border-collapse ${border1} w-11/12 mt-5`}>
                 <thead>
                     <tr className="bg-blue-900 text-white text-center">
@@ -47,7 +47,7 @@ const Product = () => {
                                 <td className={`${border1} text-center`}>{product.price}</td>
                                 <td className={`${border1} text-center`}>{product.amount}</td>
                                 <td className={`${border1} flex item-center justify-center gap-4 py-2.5`}>
-                                    <Link href={`/dashboard/product/edit/${product._id}`} className="flex bg-blue-700 p-2 gap-1 rounded-lg text-white hover:bg-blue-900">
+                                    <Link href={`/dashboard/product/edit/${product._id}`} className="flex bg-blue-900 p-2 gap-1 rounded-lg text-white hover:bg-blue-700">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -64,7 +64,7 @@ const Product = () => {
                                         </svg>
                                         Edit
                                     </Link>
-                                    <Link href={`/dashboard/product/delete/${product._id}`} className="flex bg-rose-700 p-2 gap-1 rounded-lg text-white hover:bg-rose-900">
+                                    <Link href={`/dashboard/product/delete/${product._id}`} className="flex bg-slate-400 p-2 gap-1 rounded-lg text-white hover:bg-rose-700">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
