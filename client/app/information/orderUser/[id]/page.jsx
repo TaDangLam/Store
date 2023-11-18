@@ -21,7 +21,7 @@ const ListOrder = () => {
     }, [])
     console.log(order);
     return (
-        <div className="flex flex-col gap-1 px-2 py-5">
+        <div className="flex flex-col gap-1">
             <div className="text-3xl text-red-500 font-semibold">Your Order</div>
             <div className="border-b-4 border-red-300 w-3/12"></div>
             <div className="flex justify-center">
@@ -38,10 +38,10 @@ const ListOrder = () => {
                     <tbody>
                         {order.map((ord, index) => (
                             <tr key={ord._id}>
-                                <td className={`${border1} pl-2`}>{index + 1}</td>
+                                <td className={`${border1} pl-2 text-center`}>{index + 1}</td>
                                 <td className={`${border1} pl-2`}>{ord.orderBy.name}</td>
                                 <td className={`${border1} pl-2`}>{ord._id}</td>
-                                <td className={`${border1} pl-2`}>{ord.status}</td>
+                                <td className={`${border1} pl-2 `}>{ord.status}</td>
                                 
                                 <td className={`${border1} p-2 flex justify-center`}>
                                     <Link href={`/information/detailOrder/${ord._id}`} className="flex bg-slate-300 p-1.5 gap-1 rounded-lg text-slate-600 hover:bg-lime-700 hover:text-white w-4/5 justify-center">

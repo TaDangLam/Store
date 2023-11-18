@@ -64,22 +64,24 @@ const orderController = {
     },
 
     getOrderDetail: async(req, res) => {
-        const orderId = req.params.id;
-        console.log("orderId: ", orderId);
+        const orderId = req.params.orderId;
+        // console.log("orderId: ", orderId);
         try {
-            const order = await Order.findById(orderId);
+            const order = await Order.findById(orderId)
+                .populate('items.productID')
             if (!order) {
                 return res.status(StatusCodes.NOT_FOUND).json({ message: 'Order not found' });
             }
-            console.log("order: ", order);
+            // console.log("order: ", order);
             
             const user = await User.findById(order.orderBy);
-            console.log("user: ", user);
+            // console.log("user: ", user);
             
             const orderDetail = {
                 _id: order._id,
                 totalPrice: order.totalPrice,
                 status: order.status,
+                createdAt: order.createdAt,
                 user: {
                     name: user.name,
                     email: user.email,
@@ -89,8 +91,8 @@ const orderController = {
                 },
                 items: order.items,
             };
-            console.log("orderDetail: ", orderDetail);
-            res.status(StatusCodes.OK).json(orderDetails);
+            // console.log("orderDetail: ", orderDetail);
+            res.status(StatusCodes.OK).json(orderDetail);
         } catch (err) {
             console.error(err);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });

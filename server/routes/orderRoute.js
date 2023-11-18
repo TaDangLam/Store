@@ -13,6 +13,6 @@ Router.get('/cancelled', orderController.getAllCancelledOrder);
 Router.delete('/delete/:id', orderController.deleteOrder);
 Router.patch('/update/:id', orderController.updateOrder);
 Router.get('/:userID', orderController.getUserOrder);
-Router.get('/:orderId', orderController.getOrderDetail);
+Router.get('/order-detail/:orderId', orderController.getOrderDetail);
 
 export const API_Order = Router;
