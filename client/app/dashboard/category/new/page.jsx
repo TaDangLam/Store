@@ -42,7 +42,7 @@ const NewCategory = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="flex gap-3">
                         <label className="text-blue-900">Category Name:</label>
-                        <input value={name} onChange={e => setName(e.target.value)} type="text" />
+                        <input value={name} onChange={e => setName(e.target.value)} type="text" className="px-2"/>
                     </div>
                     <button type="submit" className="text-white bg-blue-900  py-1 rounded-md w-16">Save</button>
                 </form>

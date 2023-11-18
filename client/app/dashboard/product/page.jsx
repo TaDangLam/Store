@@ -46,7 +46,7 @@ const Product = () => {
                                 <td className={`${border1} pl-2`}>{product.categories.name}</td>
                                 <td className={`${border1} text-center`}>{product.price}</td>
                                 <td className={`${border1} text-center`}>{product.amount}</td>
-                                <td className={`${border1} flex item-center justify-center gap-4 py-2.5`}>
+                                <td className={`${border1} flex item-center justify-center gap-4 py-2.5 px-2`}>
                                     <Link href={`/dashboard/product/edit/${product._id}`} className="flex bg-blue-900 p-2 gap-1 rounded-lg text-white hover:bg-blue-700">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

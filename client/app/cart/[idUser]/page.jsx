@@ -128,7 +128,7 @@ const CartPage = () => {
 
     return (
         <div className="flex flex-col py-5">
-            <div className="text-2xl flex items-center w-full h-1/4 mb-4">Cart</div>
+            <div className="text-2xl flex items-center w-full h-1/4 mb-4 font-semibold">Cart</div>
             <div className=" flex gap-2 w-full h-3/4">
                 <div className="flex flex-col bg-white h-full w-9/12 px-4 py-1.5 rounded-lg">
                     <div className="flex border-y-2 items-center gap-16 w-full h-1/3"> 

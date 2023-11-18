@@ -38,7 +38,7 @@ const CategoryPage = () => {
                             <td className={`${border1} pl-2 text-`}>{cate.name}</td>
                             <td className={`${border1} pl-2`}>{cate._id}</td>
                             <td className={`${border1} flex justify-center gap-4 py-2.5`}>
-                                <Link href={`/dashboard/category/edit/${cate._id}`} className="flex bg-blue-700 p-2 gap-1 rounded-lg text-white hover:bg-blue-900">
+                                <Link href={`/dashboard/category/edit/${cate._id}`} className="flex bg-blue-900 p-2 gap-1 rounded-lg text-white hover:bg-blue-700">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"

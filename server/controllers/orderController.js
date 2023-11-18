@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { Order } from '../model/orderModel.js';
 import { Product } from '../model/productModel.js';
+import { User } from "../model/userModel.js";
 
 const orderController = {
     
@@ -52,11 +53,47 @@ const orderController = {
     getUserOrder: async(req, res) => {
         try{
             const userID = req.params.userID;  
-            const orderDoc = await Order.find()
-                .where('userID').equals(userID)
+            const orderDoc = await Order.find({ orderBy: userID })
+            .populate('orderBy')
+            .populate('items.productID')
+            .exec();
             res.status(StatusCodes.OK).json(orderDoc);
         }catch (err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
+
+    getOrderDetail: async(req, res) => {
+        const orderId = req.params.id;
+        console.log("orderId: ", orderId);
+        try {
+            const order = await Order.findById(orderId);
+            if (!order) {
+                return res.status(StatusCodes.NOT_FOUND).json({ message: 'Order not found' });
+            }
+            console.log("order: ", order);
+            
+            const user = await User.findById(order.orderBy);
+            console.log("user: ", user);
+            
+            const orderDetail = {
+                _id: order._id,
+                totalPrice: order.totalPrice,
+                status: order.status,
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    address: user.address,
+                    province: user.province,
+                    phone: user.phone,
+                },
+                items: order.items,
+            };
+            console.log("orderDetail: ", orderDetail);
+            res.status(StatusCodes.OK).json(orderDetails);
+        } catch (err) {
+            console.error(err);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
         }
     },
 

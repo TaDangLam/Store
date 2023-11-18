@@ -16,6 +16,10 @@ const Header = () => {
             setUser(JSON.parse(userJSON));
         }
     }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
     // console.log(user);
     return(
         <div className="parent-div">
@@ -24,13 +28,13 @@ const Header = () => {
                     <Link href={'/'}><img src="/logo.jpg" alt="logo" className="w-32 h-32 rounded"/></Link>
                 </div>
                 <form 
-                     
+                     onSubmit={handleSubmit}
                     className="flex items-center h-12 pl-6 w-488 bg-white"
                 >
                     <input 
                         type="text"
                         placeholder="Search for products..." 
-                        className="rounded-l-2xl p-5 h-full w-11/12 bg-slate-100 focus:outline-none focus:ring-1 focus:ring-slate-200 focus:shadow-sm"
+                        className="rounded-l-2xl p-5 h-full w-11/12 bg-slate-100 focus:outline-none "
                     />
                     
                     <button 

@@ -102,7 +102,7 @@ const CheckoutPage = () => {
                     }
                 )),
             });
-            console.log(response.data);
+            router.push(`/order/${response.data._id}`);
         } catch (err) {
             console.log(err);
         }
@@ -116,10 +116,14 @@ const CheckoutPage = () => {
     
     return( 
         <div className="flex flex-col gap-8 w-full h-full py-8">
-            <div className=" w-full h-2/12 text-2xl flex items-center gap-4">
-                <div onClick={backPageCart} className="cursor-pointer hover:text-btn">Cart</div>
-                <div><AiOutlineRight /></div>
-                <div className="cursor-pointer hover:text-btn">Order</div>
+            <div className="flex w-full h-2/12 text-2xl  items-center gap-4 justify-center">
+                <div onClick={backPageCart} className="cursor-pointer hover:text-btn font-semibold">Cart</div>
+                <div className="text-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="flex item-center justify-center w-6 h-9">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+                <div className="cursor-pointer hover:text-btn font-semibold">Order</div>
             </div>
             <form onSubmit={handleSubmit} className="flex gap-3 w-full h-10/12">
                 <div className="flex flex-col gap-8 bg-white w-3/6 px-3 py-6 h-full rounded-xl">  

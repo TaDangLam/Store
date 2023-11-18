@@ -21,15 +21,18 @@ const orderSchema = new mongoose.Schema({
     items: [
         {
             _id: false,
-            productID: String,
-            amount: Number
+            productID: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+            amount: {type: Number},
         }
     ],
+    // items: [
+    //     {
+    //         _id: false,
+    //         productID: String,
+    //         amount: Number
+    //     }
+    // ],
     // itemTotalPrice: {
-    //     type: Number, 
-    //     required: true,
-    // },
-    // shippingFee: {
     //     type: Number, 
     //     required: true,
     // },
@@ -39,7 +42,7 @@ const orderSchema = new mongoose.Schema({
         default: 'Processing',
     },
 
-    paymentID: {
+    payment: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Payment',
     },
