@@ -3,6 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BsCurrencyDollar } from "react-icons/bs";
 import { GoTrash } from "react-icons/go";
 
 const Apicart = process.env.NEXT_PUBLIC_API_CART;
@@ -161,8 +162,8 @@ const CartPage = () => {
                 </div>
                 <div className="flex flex-col gap-1 bg-white h-full w-3/12 p-2.5 rounded-lg">
                     <div className="flex items-center w-full h-1/2 justify-between">
-                        <div>Total:</div>
-                        <div className="">{total}</div>
+                        <div className="text-lg font-semibold">Total:</div>
+                        <div className="flex text-lg font-semibold"><span className="text-red-700">{total}</span><BsCurrencyDollar /></div>
                     </div>
                     <div className="flex items-center gap-4 w-full h-1/2 justify-between ">
                         <Link href={'/'} className="text-signup-left outline outline-offset-2 outline-1 rounded-full p-1 w-3/5 text-center">

@@ -191,16 +191,17 @@ const userController = {
 
     //update user
     updateUser: async(req, res) => {
-        const { name, email, username, password, phone, province} = req.body;
-        const userID = req.params.id;
+        const { name, email, username, password, phone, province, id } = req.body;
+        // const userID = req.params.id;
         try {
             const salt = await bcrypt.genSalt(10);
             const hashed = await bcrypt.hash(password, salt);
-            const userData = await User.findByIdAndUpdate(userID, { 
+            const userData = await User.findByIdAndUpdate(id, { 
                 name, 
                 email,
                 username, 
-                password: hashed, 
+                password: hashed,
+                address,
                 phone,
                 province
             }, {new: true});

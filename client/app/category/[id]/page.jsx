@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
-// import { useRouter } from 'next/navigation'
+import { BsCurrencyDollar } from "react-icons/bs";
 
 const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
@@ -101,7 +101,7 @@ const Category = () => {
                                 <img src={ApiStaticFile + `/${product.name}/${product.images[0]}`} alt="logo" className='w-full h-4/6 object-cover'/>
                                 <div className='h-1/6 text-sm text-center mt-0'>{product.name}</div>
                                 <div className=' h-1/6 mb-0 flex items-center justify-center'>
-                                    <span className='text-sm  text-category'>{product.price} &ensp;</span>
+                                    <span className='flex font-medium text-md text-category'>{product.price} <BsCurrencyDollar /></span>
                                 </div>
                         </div>
                     </Link>

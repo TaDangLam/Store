@@ -28,7 +28,7 @@ const InformationLayout = ({ children }) => {
                     {showHeaderAndFooter ? (
                             <NavbarInfo user={user}/>
                         ) : (
-                            <NavbarOrderDetail />
+                            <NavbarOrderDetail user={user}/>
                         )}
                 </div>
                 <div className={showHeaderAndFooter ? 'w-9/12 bg-slate-50 rounded-xl  px-2 py-5' : 'w-9/12'}>{children}</div>

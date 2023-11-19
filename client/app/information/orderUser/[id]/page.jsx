@@ -11,7 +11,7 @@ const ListOrder = () => {
     const { id } = useParams();
     const [order, setOrder] = useState([]);
     
-    const border1 = 'border border-slate-400';
+    const border1 = 'border border-slate-300';
     const border2 = border1 + ' font-semibold text-xl';
 
     useEffect(() => {

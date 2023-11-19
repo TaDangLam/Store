@@ -12,20 +12,37 @@ const InfomationPage = () => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [userDetail, setUserDetail] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [province, setProvince] = useState("");
+  const [phone, setPhone] = useState("");
+
   const [isPasswordEditable, setPasswordEditable] = useState(false);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-
+  
   const getUserFromSessionStorage = () => {
     const userJSON = sessionStorage.getItem("user");
     if (userJSON) {
       setUser(JSON.parse(userJSON));
     }
+    console.log(user)
   };
-
+  
   useEffect(() => {
     getUserFromSessionStorage();
   }, []);
+
+  useEffect(() => {
+    setName(user?.user.name);
+    setEmail(user?.user.email);
+    setAddress(user?.user.address);
+    setProvince(user?.user.province);
+    setPhone(user?.user.phone);
+    setPassword(user?.user.password);
+    setRepeatPassword(user?.user.password);
+  }, [user]);
 
   const handleCheckboxChange = () => {
     setPasswordEditable(!isPasswordEditable);
@@ -34,6 +51,7 @@ const InfomationPage = () => {
       setRepeatPassword("");
     }
   };
+
   const handleLogout = async () => {
     try {
       const result = await axios.post(apiUserLogOut);
@@ -44,12 +62,26 @@ const InfomationPage = () => {
       console.log(err);
     }
   };
+  console.log(user?.user._id)
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userToUpdate = {
+      id: user?.user.id, 
+      name: 'New Name',
+      email: 'newemail@example.com',
+      username: 'newUsername',
+      password: 'newPassword',
+      phone: 'newPhone',
+      province: 'newProvince'
+  };
+  }
+  
   return (
     <div className="">
       <div className="flex h-full gap-5">
         <div className=" w-full h-full ">
-          <form className="w-full p-5">
+          <form onSubmit={handleSubmit} className="w-full p-5">
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -59,6 +91,8 @@ const InfomationPage = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="name"
                   type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
                   placeholder=""
                 />
               </div>
@@ -72,6 +106,8 @@ const InfomationPage = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="email"
                   type="text"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                   placeholder=""
                 />
               </div>
@@ -85,6 +121,8 @@ const InfomationPage = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="address"
                   type="text"
+                  value={address}
+                  onChange={e => setAddress(e.target.value)}
                   placeholder=""
                 />
               </div>
@@ -98,6 +136,8 @@ const InfomationPage = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="province"
                   type="text"
+                  value={province}
+                  onChange={e => setProvince(e.target.value)}
                   placeholder=""
                 />
               </div>
@@ -111,6 +151,8 @@ const InfomationPage = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="phone"
                   type="text"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
                   placeholder=""
                 />
               </div>
@@ -169,7 +211,7 @@ const InfomationPage = () => {
                 </label>
               </div>
             </div>
-            <button className="bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-yellow-500 hover:to-pink-500 text-white font-bold py-2 px-4 mx-3 w-36 rounded">
+            <button type="submit" className="bg-gradient-to-r from-signup-left to-signup-right hover:from-signup-right hover:to-signup-left text-white font-bold py-2 px-4 mx-3 w-36 rounded">
               Confirm
             </button>
           </form>

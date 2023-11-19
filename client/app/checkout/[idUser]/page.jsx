@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { TbCircleNumber1, TbCircleNumber2 } from "react-icons/tb";
 
 const Apicart = process.env.NEXT_PUBLIC_API_CART;
 const Apiuser = process.env.NEXT_PUBLIC_API_USER;
@@ -117,13 +119,13 @@ const CheckoutPage = () => {
     return( 
         <div className="flex flex-col gap-8 w-full h-full py-8">
             <div className="flex w-full h-2/12 text-2xl  items-center gap-4 justify-center">
-                <div onClick={backPageCart} className="cursor-pointer hover:text-btn font-semibold">Cart</div>
+                <div onClick={backPageCart} className="cursor-pointer text-btn hover:text-black font-semibold flex items-center gap-1"><TbCircleNumber1/> Cart</div>
                 <div className="text-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="flex item-center justify-center w-6 h-9">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
                     </svg>
                 </div>
-                <div className="cursor-pointer hover:text-btn font-semibold">Order</div>
+                <div className="cursor-pointer hover:text-btn font-semibold flex items-center gap-1"><TbCircleNumber2 /> Order</div>
             </div>
             <form onSubmit={handleSubmit} className="flex gap-3 w-full h-10/12">
                 <div className="flex flex-col gap-8 bg-white w-3/6 px-3 py-6 h-full rounded-xl">  
@@ -148,12 +150,12 @@ const CheckoutPage = () => {
                             <div className="flex items-center justify-between border-b-2 border-slate-100 h-full w-full">
                                 <div className="h-full w-7/12">{cartItem.productID.name}</div>
                                 <div className="h-full w-3/12 text-center">{cartItem.amount}</div>
-                                <div className="h-full w-2/12">{productPrices[cartItem.productID._id]}</div>
+                                <div className="h-full w-2/12 flex">{productPrices[cartItem.productID._id]} <BsCurrencyDollar/></div>
                             </div>
                         ))}
                         <div className="flex items-center justify-between border-b-2 border-rose-500 h-full w-full">
                             <div className="h-full w-6/12 text-xl font-semibold">Total:</div>
-                            <div className="h-full w-2/12 text-xl font-medium">{total}</div>
+                            <div className="h-full w-2/12 text-xl font-semibold flex"><span className="text-red-700">{total}</span> <BsCurrencyDollar/></div>
                         </div>
                     </div>
                     <button type="submit" className="w-full h-1/5 bg-rose-500 p-2 text-white rounded-lg hover:bg-rose-800">Order</button>

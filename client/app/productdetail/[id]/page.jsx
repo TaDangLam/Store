@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { BiSkipPreviousCircle, BiSkipNextCircle } from "react-icons/bi";
+import { BsCurrencyDollar, BsCaretRightFill  } from "react-icons/bs";
 
 const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
@@ -153,13 +154,13 @@ const ProductDetail = () => {
                 </div>
                 <div className='w-1/2 h-full'>
                     <div className='text-3xl border-b border-category my-4'>{productDetail?.name}</div>
-                    <div className='text-2xl text-category my-5'>{productDetail?.price}</div>
+                    <div className='text-2xl font-medium my-5 flex'><span className='text-category'>{productDetail?.price}</span> <BsCurrencyDollar/></div>
                     <div className=''>
                         {productDetail ? (
                             <ul className='properties-product'>
                                 {productDetail.properties.map((prop, index) => (
                                     <li key={index} className='my-1 flex items-center gap-2'>
-                                        <div>-</div>
+                                        <div className='text-btn'><BsCaretRightFill/></div>
                                         <div className='flex gap-2'>
                                             <p>{`${prop.key}: `}</p>
                                             <p>{`${prop.value}`}</p>
@@ -172,11 +173,11 @@ const ProductDetail = () => {
                         )}
                     </div>
                     <div className='flex gap-2 py-3 items-center'>
-                        <div className='flex h-10 w-24  justify-between'>
+                        {/* <div className='flex h-10 w-24  justify-between'>
                             <button className='bg-btn text-white p-2 rounded-pd' onClick={handleDecreaseQuantity}>-</button>
                             <div className='border-x-2 w-8 text-orange-cus flex items-center justify-center'>{quantity}</div>
                             <button className='bg-btn text-white p-2 rounded-pd' onClick={handleIncreaseQuantity}>+</button>
-                        </div>
+                        </div> */}
                         <button className='bg-btn text-white p-2 rounded-pd' onClick={handleAddToCart}>Add To Cart</button>
                         <button className='bg-btn text-white p-2 rounded-pd' >Buy</button>
                     </div>

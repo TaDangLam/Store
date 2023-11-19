@@ -83,6 +83,7 @@ const orderController = {
                 status: order.status,
                 createdAt: order.createdAt,
                 user: {
+                    _id: user._id,
                     name: user.name,
                     email: user.email,
                     address: user.address,

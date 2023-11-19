@@ -17,7 +17,7 @@ const NotifyPage = () => {
                 <div className="flex items-center  justify-center text-btn text-3xl font-bold w-full ">Order Success</div>
                 <div className="flex gap-5 items-center justify-center w-full mt-2">
                     <Link href={'/'} className="bg-red-700 hover:bg-red-500 p-3 rounded-pd text-white">Continue Shopping</Link>
-                    <Link href={`/detailOrder/${id}`} className="bg-slate-400 hover:bg-lime-600 p-3 rounded-pd text-white">Order Details</Link>
+                    <Link href={`/information/detailOrder/${id}`} className="bg-slate-400 hover:bg-lime-600 p-3 rounded-pd text-white">Order Details</Link>
                 </div>
             </div>
         </div>
