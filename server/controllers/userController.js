@@ -191,20 +191,16 @@ const userController = {
 
     //update user
     updateUser: async(req, res) => {
-        const { name, email, username, password, phone, province, id } = req.body;
+        const { name, email, address, username, password, phone, province, id } = req.body;
         // const userID = req.params.id;
         try {
-            const salt = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash(password, salt);
-            const userData = await User.findByIdAndUpdate(id, { 
-                name, 
-                email,
-                username, 
-                password: hashed,
-                address,
-                phone,
-                province
-            }, {new: true});
+            let updatedData = { name, email, username, address, phone, province };
+            if(password) {
+                const salt = await bcrypt.genSalt(10);
+                const hashed = await bcrypt.hash(password, salt);
+                updatedData.password = hashed;
+            }
+            const userData = await User.findByIdAndUpdate(id, updatedData, {new: true});
             return res.status(StatusCodes.OK).json(userData);
         } catch (err) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

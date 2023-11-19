@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation'
 
 const Header = () => {
     const [user, setUser] = useState(null);
+    const [searchItem, setSearchItem] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         const userJSON = sessionStorage.getItem('user');
@@ -17,8 +19,9 @@ const Header = () => {
         }
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
+        
     }
     // console.log(user);
     return(
@@ -33,6 +36,8 @@ const Header = () => {
                 >
                     <input 
                         type="text"
+                        value={searchText}
+                        onChange={e => setSearchText(e.target.value)}
                         placeholder="Search for products..." 
                         className="rounded-l-2xl p-5 h-full w-11/12 bg-slate-100 focus:outline-none "
                     />
