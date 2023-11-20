@@ -10,8 +10,9 @@ Router.post('/', orderController.addOrder);
 Router.get('/shipped', orderController.getAllShippedOrder);
 Router.get('/delivered', orderController.getAllDeliveredOrder);
 Router.get('/cancelled', orderController.getAllCancelledOrder);
-Router.delete('/delete/:id', orderController.deleteOrder);
-Router.patch('/update/:id', orderController.updateOrder);
+Router.delete('/delete/:id', middlewareController.verifyTokenAdmin, orderController.deleteOrder);
+Router.patch('/update/:id', middlewareController.verifyTokenAdmin, orderController.updateOrder);
+Router.patch('/update-status/:id', middlewareController.verifyTokenAdmin, orderController.updateStatusOrder);
 Router.get('/:userID', orderController.getUserOrder);
 Router.get('/order-detail/:orderId', orderController.getOrderDetail);
 

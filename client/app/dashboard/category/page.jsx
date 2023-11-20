@@ -1,9 +1,9 @@
 'use client'
-
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Spinner1 from "@/components/spinner1";
 
 const apiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
 
@@ -11,19 +11,27 @@ const CategoryPage = () => {
     const router = useRouter();
     const [category, setCategory] = useState([]);
     const [categoryNew, setCategoryNew] = useState([{name: ''}]);
+    const [loading, setLoading] = useState(false);
 
     const border1 = 'border border-slate-400';
     const border2 = border1 + ' font-semibold text-xl';
 
     useEffect(() => {
+        setLoading(true);
         axios.get(apiCategory)
-        .then(result => setCategory(result.data));
+        .then(result => {
+            setCategory(result.data);
+            setLoading(false);
+        });
     }, []);
 
     return ( 
         <div >
-            <Link href={'/dashboard/category/new'} className="bg-blue-900 text-white rounded-md py-1 px-2 ">Add New Category</Link>
-
+            {loading ? (
+                <div className="text-center py-40"><Spinner1 /></div>
+            ) : (
+                <div>
+                                <Link href={'/dashboard/category/new'} className="bg-blue-900 text-white rounded-md py-1 px-2 ">Add New Category</Link>
             <table className={`table-auto border-collapse ${border1} w-11/12 mt-5 ml-2`}>
                 <thead>
                     <tr className="bg-blue-900 text-white text-center">
@@ -77,6 +85,8 @@ const CategoryPage = () => {
                     ))}
                 </tbody>
             </table>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const orderStatusEnum = ['Processing', 'Cancelled'];
+const orderStatusEnum = ['Processing', 'Success'];
 
 const orderSchema = new mongoose.Schema({
     orderBy: {

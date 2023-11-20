@@ -16,7 +16,7 @@ const NavbarOrderDetail = ({ user }) => {
             await axios.post(apiUser);
             sessionStorage.removeItem('user');
             console.log('logout successful')
-            router.push('/')
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }

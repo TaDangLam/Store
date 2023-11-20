@@ -150,7 +150,7 @@ const CheckoutPage = () => {
                             <div className="flex items-center justify-between border-b-2 border-slate-100 h-full w-full">
                                 <div className="h-full w-7/12">{cartItem.productID.name}</div>
                                 <div className="h-full w-3/12 text-center">{cartItem.amount}</div>
-                                <div className="h-full w-2/12 flex">{productPrices[cartItem.productID._id]} <BsCurrencyDollar/></div>
+                                <div className="h-full w-2/12 flex">{productPrices[cartItem.productID._id]} </div>
                             </div>
                         ))}
                         <div className="flex items-center justify-between border-b-2 border-rose-500 h-full w-full">

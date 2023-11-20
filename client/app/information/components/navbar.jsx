@@ -15,12 +15,11 @@ const NavbarInfo = ({ user }) => {
         try {
             await axios.post(apiUser);
             sessionStorage.removeItem('user');
-            console.log('logout successful')
-            router.push('/')
+            console.log('logout successful');
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
-        
     }
 
     return ( 

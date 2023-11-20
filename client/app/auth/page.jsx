@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 const Apilogin = process.env.NEXT_PUBLIC_API_LOG_IN;
 
@@ -24,18 +25,62 @@ const Login = () => {
             // console.log(dataLogin)
             if(dataLogin?.role === 'admin'){
                 sessionStorage.setItem('user', JSON.stringify(dataLogin));
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                  });
                 router.push('/dashboard')
             } else if(dataLogin?.role === 'staff'){
                 sessionStorage.setItem('user', JSON.stringify(dataLogin));
                 router.push('/staff')
             } else {
                 sessionStorage.setItem('user', JSON.stringify(dataLogin));
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                  });
                 router.push('/')
             }
             
         } catch (err) {
             sessionStorage.removeItem('user');
-            console.log(err);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "error",
+                title: "Signed in Failed"
+              });
         }
     }
     

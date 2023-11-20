@@ -11,45 +11,33 @@ const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
 const ApiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
 
-const mergeSort = (arr, sortProperty, sortOrder) => {
+const mergeSort = (arr, sortBy) => {
     if (arr.length <= 1) {
-      return arr;
+        return arr;
     }
-  
+
     const middle = Math.floor(arr.length / 2);
     const left = arr.slice(0, middle);
     const right = arr.slice(middle);
-  
-    const sortedLeft = mergeSort(left, sortProperty, sortOrder);
-    const sortedRight = mergeSort(right, sortProperty, sortOrder);
-  
-    const result = sortOrder === 'asc' ? merge(sortedLeft, sortedRight, sortProperty) : merge(sortedLeft, sortedRight, sortProperty).reverse();
-  
-    return result;
+
+    return merge(mergeSort(left, sortBy), mergeSort(right, sortBy), sortBy);
 };
-  
-const merge = (left, right, sortProperty) => {
+
+const merge = (left, right, sortBy) => {
     let result = [];
     let leftIndex = 0;
     let rightIndex = 0;
-  
+
     while (leftIndex < left.length && rightIndex < right.length) {
-      const leftValue = left[leftIndex][sortProperty];
-      const rightValue = right[rightIndex][sortProperty];
-  
-      // Chuyển đổi giá trị sang số nếu chúng không phải là số
-      const leftNumber = typeof leftValue === 'number' ? leftValue : parseFloat(leftValue);
-      const rightNumber = typeof rightValue === 'number' ? rightValue : parseFloat(rightValue);
-  
-      if (leftNumber < rightNumber) {
-        result.push(left[leftIndex]);
-        leftIndex++;
-      } else {
-        result.push(right[rightIndex]);
-        rightIndex++;
-      }
+        if (sortBy === 'asc' ? left[leftIndex].price < right[rightIndex].price : left[leftIndex].price > right[rightIndex].price) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        } else {
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
     }
-  
+
     return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 };
 

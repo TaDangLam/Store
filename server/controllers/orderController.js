@@ -9,7 +9,9 @@ const orderController = {
     // GET ALL Order
     getAllOrder: async(req, res) => {
         try{
-            const order = await Order.find();
+            const order = await Order.find()
+            .populate('orderBy')
+            .populate('items.productID');
             res.status(StatusCodes.OK).json(order);
         }catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -171,6 +173,21 @@ const orderController = {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
+
+    updateStatusOrder: async(req, res) => {
+        const orderID = req.params.id;
+        try {
+            const order = await Order.findById(orderID);
+            if (!order) {
+                return res.status(StatusCodes.NOT_FOUND).json({ message: 'Order not found' });
+            }
+            order.status = 'Success';
+            await order.save();
+            res.status(StatusCodes.OK).json({ message: 'Order status updated to Success' });
+        } catch (err) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
+        }
+    }
 }
 
 export default orderController;
