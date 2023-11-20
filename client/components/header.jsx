@@ -8,8 +8,9 @@ import { useRouter } from 'next/navigation'
 
 
 const Header = () => {
+    const router = useRouter();
     const [user, setUser] = useState(null);
-    const [searchItem, setSearchItem] = useState([]);
+    // const [searchItem, setSearchItem] = useState([]);
     const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const Header = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        
+        router.push(`/search?search=${searchText}`);
     }
     // console.log(user);
     return(
@@ -31,7 +32,7 @@ const Header = () => {
                     <Link href={'/'}><img src="/logo.jpg" alt="logo" className="w-32 h-32 rounded"/></Link>
                 </div>
                 <form 
-                     onSubmit={handleSubmit}
+                    onSubmit={handleSubmit}
                     className="flex items-center h-12 pl-6 w-488 bg-white"
                 >
                     <input 

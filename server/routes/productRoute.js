@@ -55,7 +55,8 @@ const upload = multer({ storage: storage });
 
 Router.get('/', productController.getAllProduct);
 Router.post('/', upload.any(), productController.addProduct);
-Router.get('/search/:key', productController.searchProduct);
+// Router.get('/search/:key', productController.searchProduct);
+Router.get('/search', productController.searchProduct);
 Router.get('/:id', productController.getProductDetail);
 Router.get('/category/:id', productController.getProductByCategory)
 Router.patch('/:id', upload.any(), productController.updateProduct);

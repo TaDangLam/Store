@@ -109,13 +109,29 @@ const productController = {
     // },
 
     //Search Product
+    // searchProduct: async(req, res) => {
+    //     const searchTemp = req.params.key;
+    //     try {
+    //         const productData = await Product.find({
+    //             $or: [
+    //                 {name: {$regex: searchTemp, $options: 'i'}},
+    //                 {description: {$regex: searchTemp, $options: 'i'}},
+    //             ],
+    //         });
+    //         res.status(StatusCodes.OK).json(productData);
+    //     }catch(err) {
+    //         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    //     }
+    // },
+
     searchProduct: async(req, res) => {
-        const searchTemp = req.params.key;
+        const { search } = req.query;
+        
         try {
             const productData = await Product.find({
                 $or: [
-                    {name: {$regex: searchTemp, $options: 'i'}},
-                    {description: {$regex: searchTemp, $options: 'i'}},
+                    {name: {$regex: search, $options: 'i'}},
+                    {description: {$regex: search, $options: 'i'}},
                 ],
             });
             res.status(StatusCodes.OK).json(productData);

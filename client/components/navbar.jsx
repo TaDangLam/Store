@@ -44,10 +44,10 @@ const NavBar = () => {
     }, [])
     // console.log(category)
     return(
-        <div>   
-            <div className='pl-4'>
+        <div className=''>   
+            <div className=''>
                 {category.map(cate => {
-                    return <Link href={`/category/${cate._id}`} className='flex-link'><div className='flex items-center gap-2'>{getCategoryIcon(cate.name)} {cate.name}</div></Link> 
+                    return <Link href={`/category/${cate._id}`} className='flex-link'><div className='flex items-center gap-2 pl-4'>{getCategoryIcon(cate.name)} {cate.name}</div></Link> 
                 })}
             </div>
         </div>

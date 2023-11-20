@@ -48,26 +48,26 @@ const Login = () => {
                         <div className="text-signup-left text-4xl font-bold">Sign in  Account</div>
                         <div className="border-2 w-20 border-signup-left"></div>
                         <form onSubmit={handleLogin} className="my-5 flex flex-col items-center gap-4">
-                            <div className="flex items-center gap-2 w-72 p-3 bg-slate-100">
+                            <label className="flex items-center gap-2 w-72 p-3 bg-slate-100">
                                 <AiOutlineMail className="w-1/12"/>
                                 <input 
                                     type="text" 
                                     placeholder="Username" 
-                                    className="w-11/12 bg-slate-100 outline-none"
+                                    className="w-full bg-slate-100 outline-none"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
-                            </div>
-                            <div className="flex items-center gap-2 w-72 p-3 bg-slate-100">
+                            </label>
+                            <label className="flex items-center gap-2 w-72 p-3 bg-slate-100">
                                 <AiOutlineLock className="w-1/12"/>
                                 <input 
                                     type="password" 
                                     placeholder="Password" 
-                                    className="w-11/12 bg-slate-100 outline-none"
+                                    className="w-full bg-slate-100 outline-none"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                            </div>
+                            </label>
                             <div className="flex w-72 items-center justify-between">
                                 <label className="flex items-center gap-1"><input type="checkbox" />Remember Me</label>
                                 <Link href={'/auth/forgotPassword'} className="hover:text-signup-left">Forgot Password</Link>
