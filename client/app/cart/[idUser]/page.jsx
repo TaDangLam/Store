@@ -3,7 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BsCurrencyDollar } from "react-icons/bs";
+import { BsCurrencyDollar, BsCartX } from "react-icons/bs";
 import { GoTrash } from "react-icons/go";
 import { TbCircleNumber1 } from "react-icons/tb";
 
@@ -131,7 +131,9 @@ const CartPage = () => {
 
     return (
         <div className="flex flex-col py-5">
-            <div className="text-2xl flex gap-1 items-center w-full h-1/4 mb-4 font-semibold ml-3 hover:text-btn cursor-pointer"><TbCircleNumber1/> Cart</div>
+            {cartData?.items && cartData.items.length > 0 ? (
+                <div className="flex flex-col py-5">
+                    <div className="text-2xl flex gap-1 items-center w-full h-1/4 mb-4 font-semibold ml-3 hover:text-btn cursor-pointer"><TbCircleNumber1/> Cart</div>
             <div className=" flex gap-2 w-full h-3/4">
                 <div className="flex flex-col bg-white h-full w-9/12 px-4 py-1.5 rounded-lg">
                     <div className="flex border-y-2 items-center gap-16 w-full h-1/3"> 
@@ -175,6 +177,16 @@ const CartPage = () => {
                     </div>
                 </div>
             </div>
+                </div>
+            ) : (
+                <div className="flex flex-col items-center justify-center gap-10 p-10">
+                    <div className=" w-2/12 h-1/2 flex text-slate-400"><BsCartX className="w-full h-full"/></div>
+                    <Link href={'/'} className="bg-red-700 hover:bg-red-500 text-white text-md font-semibold w-4/12 h-1/2 text-center p-2 rounded-pd">Empty Cart , Please Back Home Page</Link>
+                </div>
+                
+            )}
+            
+
         </div>
     )
 }

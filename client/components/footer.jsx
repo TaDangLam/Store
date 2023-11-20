@@ -1,5 +1,5 @@
 'use client'
-import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger, FaPhoneAlt } from "react-icons/fa";
+import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger, FaPhoneAlt, FaAddressCard  } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
 import Link from 'next/link'
 import { useState } from "react";
@@ -11,14 +11,13 @@ const Footer = () => {
     return(
         <div className="parent-div flex items-center justify-around">
             <div className="fix-footer">
-            <h2 className="text-xl text-center underline underline-offset-2">ABOUT US</h2>
-                <div className="my-2">
-                    <div className="flex items-center gap-1"><FaPhoneAlt /> Hotline: <a href="tel:+84949859171" className="text-phone hover:underline hover:underline-offset-2">0949859171</a></div> 
-                    <div className="flex items-center gap-1"><AiFillMail /> Email: <a href="mailto:tadanglam93@gmail.com" className="text-phone hover:underline hover:underline-offset-2">tadanglam93@gmail.com</a></div>
+                <h2 className="text-xl text-center underline underline-offset-2 font-semibold">ABOUT US</h2>
+                <div className="my-2 flex flex-col gap-1 justify-center">
+                    <div className="flex items-center gap-1"><FaPhoneAlt /> Hotline: <a href="tel:+84949859171" className="text-btn hover:underline hover:underline-offset-2">0949859171</a></div> 
+                    <div className="flex items-center gap-1"><AiFillMail /> Email: <a href="mailto:tadanglam93@gmail.com" className="text-btn hover:underline hover:underline-offset-2">tadanglam93@gmail.com</a></div>
+                    <div className="flex items-center gap-1"><FaAddressCard /> Address: <span href="mailto:tadanglam93@gmail.com" className="text-btn hover:underline hover:underline-offset-2">tadanglam93@gmail.com</span></div>
                 </div>
             </div>
-            <div className="bg-rose-100 fix-footer">LK Store Company</div>
-            <div className="bg-orange-100 fix-footer">More Information</div>
             <div className="fix-footer">
                 <h2 className="text-xl text-center underline underline-offset-2 mt-0">More Information</h2> 
                 <div className="flex items-center gap-3">

@@ -61,7 +61,7 @@ const Category = () => {
     const [productByCategory, setProductByCategory] = useState([]);
     const [sortProperty, setSortProperty] = useState('');
     const [sortedProducts, setSortedProducts] = useState([]);
-    
+
     useEffect(() => {
         setLoading(true)
         axios.get(ApiProduct+`/category/${id}`)
@@ -104,7 +104,7 @@ const Category = () => {
         }
         setLoading(false);
       };
-    
+
     const handleBackHome = () => {
         router.push('/');
     }
