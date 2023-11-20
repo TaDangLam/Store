@@ -16,8 +16,12 @@ const userController = {
             // create new user in database
             const newUser = await new User({
                 username: req.body.username,
-                email: req.body.email,
                 password: hashed,
+                email: req.body.email,
+                name: req.body.name,
+                address: req.body.address,
+                province: req.body.province,
+                phone: req.body.phone,
             });
 
             // save to DB
@@ -30,14 +34,17 @@ const userController = {
 
     // Login
     loginUser: async(req, res) => {
+        const username = req.body.username;
+        const password = req.body.password;
+        // console.log(req.body.password);
         try {
-            const user = await User.findOne({ username: req.body.username });
+            const user = await User.findOne({ username });
             // check user in database
             if(!user){
                return res.status(StatusCodes.NOT_FOUND).json("Username does not exist");
             }
             const validPassword = await bcrypt.compare(
-                req.body.password,
+                password,
                 user.password
             );
 
@@ -55,7 +62,7 @@ const userController = {
                 },
                     process.env.JWT_ACCESS_KEY,
                 {
-                    expiresIn: "15m"
+                    expiresIn: "1d"
                 });
 
                 // refreshToken
@@ -70,18 +77,21 @@ const userController = {
 
                 // Cùng lúc đó lưu refreshToken vừa tạo sau khi login vào refreshTokenData[]
                 refreshTokenData.push(refreshToken);
-                console.log("refreshToken in Array: ", refreshTokenData);
-                // lưu refreshToken bằng cookie
-                res.cookie('refreshTokenCookie', refreshToken, {
-                    httpOnly: true,
-                    secure: false,
-                    path: "/",
-                    samSite: "strict"
-                });
-                // lưu vào cookie thì khỏi trả về frontend
-                // res.status(StatusCodes.ACCEPTED).json({user, accessToken, refreshToken});
-                return res.status(StatusCodes.ACCEPTED).json({user, accessToken});
-
+                if(user.role === 'admin'){
+                    res.clearCookie('refreshTokenCookie');
+                    return res.status(StatusCodes.ACCEPTED).json({user, accessToken, role: 'admin'});
+                } else if (user.role === 'staff'){
+                    res.clearCookie('refreshTokenCookie');
+                    return res.status(StatusCodes.ACCEPTED).json({user, accessToken, role: 'staff'});
+                }else {
+                    res.cookie('refreshTokenCookie', refreshToken, {
+                        httpOnly: true,
+                        secure: false,
+                        path: "/",
+                        samSite: "strict"
+                    });
+                    return res.status(StatusCodes.ACCEPTED).json({ user, accessToken, role: "customer" });
+                }
             }
         } catch(err){
             res.status(StatusCodes.BAD_REQUEST).json(err);
@@ -150,9 +160,20 @@ const userController = {
     //Get All User
     getAllUser: async(req, res) => {
         try {
-            const userData = await User.find();
+            const userData = await User.find({ role: 'customer' });
             res.status(StatusCodes.OK).json(userData);
         } catch(err){
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+        }
+    },
+
+    //get User By Id
+    getUserById: async(req, res) => {
+        const userId = req.params.id;
+        try {
+            const user = await User.findById(userId);
+            res.status(StatusCodes.OK).json(user);
+        } catch (err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
@@ -161,7 +182,7 @@ const userController = {
     deleteUser: async(req, res) => {
         try {
             const userID = req.params.id;
-            const userData = await User.findByIdAndDelete(userID);
+            await User.findByIdAndDelete(userID);
             res.status(StatusCodes.OK).json("User is Deleted");
         } catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -170,19 +191,16 @@ const userController = {
 
     //update user
     updateUser: async(req, res) => {
-        const { name, email, birth, username, password, phone } = req.body;
-        const userID = req.params.id;
+        const { name, email, address, username, password, phone, province, id } = req.body;
+        // const userID = req.params.id;
         try {
-            const salt = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash(password, salt);
-            const userData = await User.findByIdAndUpdate(userID, { 
-                name, 
-                email, 
-                birth, 
-                username, 
-                password: hashed, 
-                phone,
-            });
+            let updatedData = { name, email, username, address, phone, province };
+            if(password) {
+                const salt = await bcrypt.genSalt(10);
+                const hashed = await bcrypt.hash(password, salt);
+                updatedData.password = hashed;
+            }
+            const userData = await User.findByIdAndUpdate(id, updatedData, {new: true});
             return res.status(StatusCodes.OK).json(userData);
         } catch (err) {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

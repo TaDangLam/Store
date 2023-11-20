@@ -9,8 +9,11 @@ const userSchema = new mongoose.Schema ({
     email: {
         type: String,
     },
-    birth: {
-        type: Date
+    address: {
+        type: String,
+    },
+    province: {
+        type: String,
     },
     username: {
         type: String,

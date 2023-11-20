@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import path from 'path';
+import fs from 'fs';
 import { StatusCodes } from "http-status-codes";
 
 import { Blog } from "../model/blogModel.js";
@@ -28,8 +29,8 @@ const blogController = {
     //Create Blog
     addBlog: async(req, res) => {
         try {
-            const { title, image, content } = req.body;
-            const blogData = await Blog.create({ title, image, content });
+            const { title, images, content } = req.body;
+            const blogData = await Blog.create({ title, images: images || [], content });
             res.status(StatusCodes.CREATED).json(blogData);
         } catch(err){
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -40,8 +41,16 @@ const blogController = {
     deleteBlog: async(req, res) => {
         const blogID = req.params.id;
         try {
-            await Blog.findByIdAndDelete(blogID);
-            res.status(StatusCodes.OK).json('Blog was Deleted');
+            const blogDoc = await Blog.findById(blogID);
+            const uploadPath = path.join('./public/blogs/' + blogDoc.title);
+            if (fs.existsSync(uploadPath)) {
+                // If it exists, delete the folder
+                fs.rmdirSync(uploadPath, { recursive: true });
+                await Blog.findByIdAndDelete(blogID);
+                res.status(StatusCodes.OK).json("Blog Delete Success");
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json("Blog not found in the upload folder");
+            }
         } catch(err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
@@ -50,9 +59,9 @@ const blogController = {
     //update Blog
     updateBlog: async(req, res) => {
         const blogID = req.params.id;
-        const { title, image, content } = req.body;
+        const { title, images, content } = req.body;
         try {
-            const BlogData = await Blog.findByIdAndUpdate(blogID, { title, image, content });
+            const BlogData = await Blog.findByIdAndUpdate(blogID, { title, images, content });
             res.status(StatusCodes.OK).json(BlogData);
         } catch (err) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

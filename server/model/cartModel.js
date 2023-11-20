@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const cartSchema = new mongoose.Schema({
     orderBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer'
+        ref: 'User',
     },
     items: [
         {

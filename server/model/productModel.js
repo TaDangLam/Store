@@ -6,12 +6,12 @@ const productSchema = new Schema({
         type: String, 
         required: true,
     },
-    description: {
-        type: String,
-        required: true,
-    },
+    // properties: {
+    //     type: Object,
+    // },
+    properties: [{type: Object}],
     price: {
-        type: String, 
+        type: Number, 
         required: true,
     },
     amount: {
@@ -25,7 +25,6 @@ const productSchema = new Schema({
     images: [
         {type: String},
     ],
-        
 }, {
     timestamps: true
 })

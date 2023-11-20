@@ -16,7 +16,7 @@ const middlewareController = {
                 req.user = user;
                 next();
             });
-        }
+        }   
         else{
             return res.status(StatusCodes.UNAUTHORIZED).json("You are not Authenticated");
         }

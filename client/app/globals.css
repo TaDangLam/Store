@@ -14,13 +14,64 @@ img {
 
 
 .wrapper{
-  @apply px-36  shadow-header;
+  @apply px-36 shadow-header;
 }
 
-.body-cus{
-  @apply px-36 bg-slate-300;
+.body-cus{  
+  @apply px-36 bg-slate-200 pb-10 pt-1;
 }
 
-/* .children-cus{
-  @apply bg-white;
-} */
+.footer-cus{
+  @apply px-36 mb-0;
+}
+
+.fix-footer{
+  @apply h-7;
+}
+
+.flex-link{
+  @apply my-3 flex items-center gap-2 h-8;
+}
+
+.flex-link:hover{
+  @apply  hover:text-white hover:bg-gradient-to-r from-red-cus to-orange-cus;
+}
+
+.img-banner {
+  @apply w-full h-3/4 rounded-lg cursor-pointer;
+}
+
+.img-footer {
+  @apply w-8 h-7 rounded-lg;
+}
+
+.properties-product li {
+  @apply text-gray-500;
+}
+
+.animateHidden {
+  @apply opacity-0 blur translate-y-full transition-all duration-1000 ;
+}
+
+
+.animateHidden2 {
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
+}
+
+.animateHidden3 {
+  @apply opacity-0 blur translate-y-full transition-all duration-[1250ms];
+  
+}
+
+.show {
+  @apply opacity-100 blur-none translate-y-0 ;
+}
+
+.textAnimatedHidden {
+  @apply opacity-0 blur translate-x-full transition-all  duration-1000;
+}
+
+.textAnimatedShow {
+  @apply opacity-100 blur-none translate-x-0 motion-reduce:transition-none;
+}

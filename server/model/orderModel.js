@@ -1,44 +1,48 @@
 import mongoose from "mongoose";
 
-const orderStatusEnum = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
+const orderStatusEnum = ['Processing', 'Success'];
 
 const orderSchema = new mongoose.Schema({
-    userID: {
+    orderBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
     totalPrice: {
-        type: String, 
-        required: true,
-    },
-    createDate: {
-        type: Date, 
-        required: true,
-    },
-    discount: {
-        type: String, 
-        required: true,
-    },
-    itemTotalPrice: {
         type: Number, 
         required: true,
     },
-    shippingFee: {
-        type: Number, 
-        required: true,
-    },
-    status: {
+    note: {
         type: String,
-        enum: orderStatusEnum,
-        default: 'Pending',
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart',
     },
     items: [
         {
-            product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-            amount: {type: Number, required: true, min: 1}, 
+            _id: false,
+            productID: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+            amount: {type: Number},
         }
     ],
-    paymentID: {
+    // items: [
+    //     {
+    //         _id: false,
+    //         productID: String,
+    //         amount: Number
+    //     }
+    // ],
+    // itemTotalPrice: {
+    //     type: Number, 
+    //     required: true,
+    // },
+    status: {
+        type: String,
+        enum: orderStatusEnum,
+        default: 'Processing',
+    },
+
+    payment: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Payment',
     },

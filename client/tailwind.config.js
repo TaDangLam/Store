@@ -16,19 +16,34 @@ module.exports = {
         488: '50rem',
       },
       borderRadius: {
-        'none': '0',
-        'sm': '0.125rem',
-        DEFAULT: '0.25rem',
-        DEFAULT: '4px',
-        'md': '0.375rem',
-        'lg': '0.5rem',
-        '2xl': '2rem',
-        'full': '9999px',
         'large': '12px',
+        'pd': '20px',
       },
       boxShadow: {
         'sm': '-5px 0px 2px 0 rgb(0 0 0 / 0.08)',
         'header': '-1px 7px 0px 0px rgba(0,0,0,0.12)',
+        'login': '-5px 5px 13px 1px rgba(0,0,0,0.49)',
+        'signup': '5px 5px 13px 1px rgba(0,0,0,0.49)'
+      },
+      colors: {
+        'red-cus': '#f7434c',
+        'category': '#f7464c',
+        'btn': '#f84c4c',
+        'phone': '#ff6600',
+        'orange-cus': '#ff8949',
+        'login-left': '#EDF1F4',
+        'login-right': '#C3CBDC',
+        'signup-left': '#FF5F6D',
+        'signup-right': '#FFC371',
+
+      },
+      spacing: {
+        '100': '16.875rem',
+      },
+      height: {
+        '63': '15.625rem',
+        '100': '22.5rem',
+        '983': '61.4375rem',
       },
     },
   },
