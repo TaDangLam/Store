@@ -54,6 +54,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 Router.get('/', productController.getAllProduct);
+Router.get('/count', productController.countProducts);
 Router.post('/', upload.any(), productController.addProduct);
 // Router.get('/search/:key', productController.searchProduct);
 Router.get('/search', productController.searchProduct);

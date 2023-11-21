@@ -6,6 +6,7 @@ import middlewareController from '../controllers/middlewareController.js';
 
 
 Router.get('/', middlewareController.verifyTokenAdmin, orderController.getAllOrder);
+Router.get('/count/', orderController.countOrder);
 Router.post('/', orderController.addOrder);
 Router.get('/shipped', orderController.getAllShippedOrder);
 Router.get('/delivered', orderController.getAllDeliveredOrder);
