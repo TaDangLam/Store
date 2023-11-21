@@ -1,11 +1,19 @@
 'use client'
-import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger } from "react-icons/fa";
-import { BiInfoCircle, BiChevronDown, BiSolidUserCircle } from "react-icons/bi";
-import { BsFillCaretDownFill } from "react-icons/bs";
 import Link from 'next/link'
 import { useEffect, useState } from "react";
+import Tippy from '@tippyjs/react/headless';
 import { useRouter } from 'next/navigation'
+import { BsFillCaretDownFill } from "react-icons/bs";
+import { BiInfoCircle, BiChevronDown, BiSolidUserCircle } from "react-icons/bi";
+import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger, FaRegAddressBook } from "react-icons/fa";
+import { MdOutlineAccountCircle } from "react-icons/md";
+import { CiGift } from "react-icons/ci";
+import { IoIosLogOut } from "react-icons/io";
+import axios from 'axios';
 
+import Popper from './popper';
+
+const apiUser = process.env.NEXT_PUBLIC_API_LOG_OUT
 
 const Header = () => {
     const router = useRouter();
@@ -19,6 +27,17 @@ const Header = () => {
             setUser(JSON.parse(userJSON));
         }
     }, []);
+    
+    const handleLogout = async() => {
+        try {
+            await axios.post(apiUser);
+            sessionStorage.removeItem('user');
+            console.log('logout successful');
+            window.location.reload();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -52,11 +71,29 @@ const Header = () => {
                 {user ? (
                     <div className="flex items-center px-8 gap-10">
                         <div><Link href={`/cart/${user?.user._id}`} className="flex items-center  bg-white hover:text-red-500"><FaShoppingCart className="mr-1"/>Cart</Link></div>
-                        <div className="flex items-center gap-1 cursor-pointer hover:text-red-500">
-                            <img src="/images.png" alt="infomation" className="h-5"/>
-                            <Link href={'/information'} className="">{user.user.username}</Link>
-                            <BsFillCaretDownFill />
-                        </div>
+                        <Tippy
+                            interactive
+                            arrow
+                            placement='bottom-end'
+                            render={attrs => (
+                                <div className="box" tabIndex="-1" {...attrs}>
+                                    <Popper>
+                                        <div className='bg-white w-36 h-full py-1 border-2 rounded-md flex flex-col gap-5 '>
+                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><MdOutlineAccountCircle/>Account </Link>
+                                            <Link href={`/information/orderUser/${user?.user._id}`} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><CiGift /> Order</Link>
+                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><FaRegAddressBook /> Address</Link>
+                                            <Link href={'/'} onClick={handleLogout} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><IoIosLogOut />Logout</Link>
+                                        </div>
+                                    </Popper>
+                                </div>
+                            )}
+                        >
+                            <div className="flex items-center gap-1 cursor-pointer hover:text-red-500">
+                                <img src="/images.png" alt="infomation" className="h-5"/>
+                                <Link href={'/information'} className="">{user.user.username}</Link>
+                                <BsFillCaretDownFill />
+                            </div>
+                        </Tippy>
                     </div>
                 ) : (
                     <div className="flex items-center px-8 gap-10 bg-white">
