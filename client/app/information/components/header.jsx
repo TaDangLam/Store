@@ -1,6 +1,6 @@
 const HeaderInfo = () => {
     return (
-        <div className="bg-gradient-to-r from-signup-left to-signup-right  py-4 rounded-pd ">
+        <div className="bg-gradient-to-r from-signup-left to-signup-right  py-4 rounded-lg ">
                 <h1 className="px-4  text-3xl font-bold w-full text-white">
                     Account Information
                 </h1>

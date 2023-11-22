@@ -17,6 +17,21 @@ const orderController = {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
+
+    //get order count
+    countOrder: async (req, res) => {
+        try {
+            // Assuming you have a 'Product' model, use its 'countDocuments' method
+            const orderCount = await Order.countDocuments();
+    
+            // Send the count as a response
+            res.status(200).json({ count: orderCount });
+        } catch (err) {
+            // Handle errors
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
     
     // GET ALL Shipped Order
     getAllShippedOrder: async(req, res) => {

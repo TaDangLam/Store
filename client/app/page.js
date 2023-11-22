@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BsCurrencyDollar } from "react-icons/bs";
 
@@ -12,82 +12,68 @@ const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
 const ApiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
 
 export default function Home() {
-  const categoryId = [
-    "653e45e706e76d10b763e191",
-    "653e460f06e76d10b763e193",
-    "653e467106e76d10b763e196",
-    "653e468906e76d10b763e198",
-    "653e46c206e76d10b763e19a",
-    "653e46d606e76d10b763e19d",
-    "653e46db06e76d10b763e19f",
-    "653e46ff06e76d10b763e1a1",
-    "653e472406e76d10b763e1a3",
-  ];
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [nameCategory, setNameCategory] = useState([]);
   const [productByCategory, setProductByCategory] = useState([]);
-
+  const [categoryIds, setCategoryIds] = useState([]);
   useEffect(() => {
     const userJSON = sessionStorage.getItem("user");
-
-    const axiosRequests = categoryId.map((categoryId) =>
-      axios
-        .get(ApiProduct + `/home/${categoryId}`)
-        .then((result) => result.data)
-        .catch((err) => {
-          console.log(err);
-          return [];
-        })
-    );
-
-    const axiosRequests2 = categoryId.map((categoryId) =>
-      axios
-        .get(ApiCategory + `/${categoryId}`)
-        .then((response) => response.data)
-        .catch((err) => {
-          console.log(err);
-          return [];
-        })
-    );
-
-    Promise.all(axiosRequests)
-      .then((results) => {
-        console.log(results);
-        // Combine data from all categories into a single array
-        const categoryProducts = results.reduce((accumulator, categoryData) => {
-          return accumulator.concat(categoryData);
-        }, []);
-
-        setProductByCategory(categoryProducts);
-      })
-      .catch((err) => console.log(err));
-
-    Promise.all(axiosRequests2)
-      .then((results) => {
-        console.log(results);
-        // Combine data from all categories into a single array
-        const categoryDetail = results.reduce((accumulator, categoryDetail) => {
-          return accumulator.concat(categoryDetail);
-        }, []);
-        setNameCategory(categoryDetail);
-      })
-      .catch((err) => console.log(err));
-    // const axiosRequests = categoryId.map((categoryId) =>
-    //   axios.get(ApiProduct + `/home/${categoryId}`)
-    //       .then(result => setProductByCategory(result.data))
-    //       .catch(err => console.log(err))
-    // );
-    // Promise.all(axiosRequests)
-    //   .then((results) => {
-    //     // Extract data from each result and update the state
-    //     const categoryProducts = results.map((result) => result.data);
-    //     setProductByCategory(categoryProducts);
-    //   })
-    //   .catch((err) => console.log(err));
     if (userJSON) {
       setUser(JSON.parse(userJSON));
     }
+    axios
+      .get(ApiCategory)
+      .then((response) => {
+        const ids = response.data.map((category) => category._id);
+        setCategoryIds(ids);
+
+        // Now you can use these category IDs in your subsequent API calls
+        const axiosRequests = ids.map((categoryId) =>
+          axios
+            .get(ApiProduct + `/home/${categoryId}`)
+            .then((result) => result.data)
+            .catch((err) => {
+              console.log(err);
+              return [];
+            })
+        );
+
+        const axiosRequests2 = ids.map((categoryId) =>
+          axios
+            .get(ApiCategory + `/${categoryId}`)
+            .then((response) => response.data)
+            .catch((err) => {
+              console.log(err);
+              return [];
+            })
+        );
+
+        Promise.all(axiosRequests2)
+          .then((results) => {
+            const categoryDetail = results.reduce(
+              (accumulator, categoryData) => {
+                return accumulator.concat(categoryData);
+              },
+              []
+            );
+            setNameCategory(categoryDetail);
+          })
+          .catch((err) => console.log(err));
+
+        Promise.all(axiosRequests)
+          .then((results) => {
+            const categoryProducts = results.reduce(
+              (accumulator, categoryData) => {
+                return accumulator.concat(categoryData);
+              },
+              []
+            );
+            setProductByCategory(categoryProducts);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -128,7 +114,7 @@ export default function Home() {
 
       <div className="content2">
         <div className="">
-          {categoryId.map((category, index) => (
+          {categoryIds.map((category, index) => (
             <div key={category} className="py-1">
               <div className=" text-white uppercase text-center text-4xl my-3">
                 {nameCategory

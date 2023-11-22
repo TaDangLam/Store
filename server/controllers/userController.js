@@ -166,6 +166,20 @@ const userController = {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         }
     },
+    //get Count User
+    countUser: async (req, res) => {
+        try {
+            // Assuming you have a 'Product' model, use its 'countDocuments' method
+            const userCount = await User.countDocuments();
+    
+            // Send the count as a response
+            res.status(200).json({ count: userCount });
+        } catch (err) {
+            // Handle errors
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
 
     //get User By Id
     getUserById: async(req, res) => {

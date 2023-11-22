@@ -30,7 +30,7 @@ const Product = () => {
 
   console.log(user);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-2">
       {loading ? (
         <div className="text-center py-40">
           <Spinner1 />
@@ -48,6 +48,7 @@ const Product = () => {
           >
             <thead>
               <tr className="bg-blue-900 text-white text-center">
+                <td className={border2}>Image</td>
                 <td className={border2}>Product Name</td>
                 <td className={border2}>Category</td>
                 <td className={border2}>Price</td>
@@ -59,8 +60,8 @@ const Product = () => {
               {dataProduct.map((product) => {
                 return (
                   <tr key={product._id}>
+                    <td className={`${border1} p-1 w-36 `}><img src={`http://localhost:3001/uploads/${product.name}/${product.images[0]}`} /></td>
                     <td className={`${border1} pl-2`}>{product.name}</td>
-                    {/* <td className={`${border1} pl-2`}><img src={`http://localhost:3001/uploads/${product.name}/${product.images[0]}`} /></td> */}
                     <td className={`${border1} pl-2`}>
                       {product.categories.name}
                     </td>
@@ -71,11 +72,11 @@ const Product = () => {
                       {product.amount}
                     </td>
                     <td
-                      className={`${border1} flex item-center justify-center gap-4 py-2.5 px-2`}
+                      className={`${border1}   item-center justify-center gap-4 py-2.5 px-2 w-ful`}
                     >
                       <Link
                         href={`/dashboard/product/edit/${product._id}`}
-                        className="flex bg-blue-900 p-2 gap-1 rounded-lg text-white hover:bg-blue-700"
+                        className="flex bg-blue-900 p-2 gap-1 rounded-lg text-white hover:bg-blue-700 my-3"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

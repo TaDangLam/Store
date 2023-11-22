@@ -6,6 +6,7 @@ import middlewareController from '../controllers/middlewareController.js';
 
 
 Router.get('/', middlewareController.verifyTokenAdmin, userController.getAllUser);
+Router.get('/count', userController.countUser);
 Router.post('/register', userController.registerUser);
 Router.post('/login', userController.loginUser);
 Router.post('/logout', userController.logoutUser);

@@ -120,7 +120,7 @@ const OrderPage = () => {
                                 {order.map((ord, index) => (
                                     <tr key={ord._id} className="">
                                         <td className={`${border1} pl-2 text-center`}>{index + 1}</td>
-                                        <td className={`${border1} pl-2`}>{ord.orderBy.username}</td>
+                                        <td className={`${border1} pl-2`}>{ord.orderBy?.username}</td>
                                         <td className={`${border1} pl-2`}>{ord._id}</td>
                                         <td className={`${border1} pl-2 text-center`}>
                                             {format(new Date(ord.createdAt), 'HH:mm dd-MM-yyyy')}
