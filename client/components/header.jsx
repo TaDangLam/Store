@@ -74,15 +74,15 @@ const Header = () => {
                         <Tippy
                             interactive
                             arrow
-                            placement='bottom-end'
+                            placement='bottom'
                             render={attrs => (
                                 <div className="box" tabIndex="-1" {...attrs}>
                                     <Popper>
-                                        <div className='bg-white w-36 h-full py-1 border-2 rounded-md flex flex-col gap-5 '>
-                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><MdOutlineAccountCircle/>Account </Link>
-                                            <Link href={`/information/orderUser/${user?.user._id}`} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><CiGift /> Order</Link>
-                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><FaRegAddressBook /> Address</Link>
-                                            <Link href={'/'} onClick={handleLogout} className='flex items-center gap-2 py-1 pl-2 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><IoIosLogOut />Logout</Link>
+                                        <div className='bg-white w-56 h-full py-1 border-2 rounded-md flex flex-col gap-5 '>
+                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-3 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><MdOutlineAccountCircle/>Account </Link>
+                                            <Link href={`/information/orderUser/${user?.user._id}`} className='flex items-center gap-2 py-1 pl-3 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><CiGift /> Order</Link>
+                                            <Link href={'/information'} className='flex items-center gap-2 py-1 pl-3 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><FaRegAddressBook /> Address</Link>
+                                            <Link href={'/'} onClick={handleLogout} className='flex items-center gap-2 py-1 pl-3 text-lg font-md hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'><IoIosLogOut />Logout</Link>
                                         </div>
                                     </Popper>
                                 </div>

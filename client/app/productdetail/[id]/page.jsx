@@ -7,7 +7,6 @@ import { BiSkipPreviousCircle, BiSkipNextCircle } from "react-icons/bi";
 import { BsCurrencyDollar, BsCaretRightFill } from "react-icons/bs";
 
 import Spinner from "@/components/spinner";
-import Spinner1 from "@/components/spinner1";
 
 const ApiProduct = process.env.NEXT_PUBLIC_API_PRODUCT_BY_CATEGORY;
 const ApiStaticFile = process.env.NEXT_PUBLIC_API_STATIC_FILE;
@@ -22,7 +21,6 @@ const ProductDetail = () => {
   const [nameCategory, setNameCategory] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [currentImage, setCurrentImage] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
 
   useEffect(() => {
@@ -110,7 +108,7 @@ const ProductDetail = () => {
     <div className="">
       {loading1 ? (
         <div className="">
-          <Spinner1 />
+          <div className="text-center py-24"><Spinner /></div>
         </div>
       ) : (
         <div className="flex gap-2 py-6">
