@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import Tippy from '@tippyjs/react/headless';
 import { useRouter } from 'next/navigation'
 import { BsFillCaretDownFill } from "react-icons/bs";
-import { BiInfoCircle, BiChevronDown, BiSolidUserCircle } from "react-icons/bi";
+import { FaDesktop, FaLaptop, FaMobileAlt, FaHeadphones} from "react-icons/fa";
+import { CiDesktopMouse1, CiKeyboard} from "react-icons/ci";
+import { MdOutlineScreenshotMonitor,  } from "react-icons/md";
+import { BsCpu, BsUsbMicro } from "react-icons/bs";
+import { BiInfoCircle, BiChevronDown } from "react-icons/bi";
 import { FaSearch, FaUserAlt, FaShoppingCart, FaBars, FaBlogger, FaRegAddressBook } from "react-icons/fa";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { CiGift } from "react-icons/ci";
@@ -14,19 +18,48 @@ import axios from 'axios';
 import Popper from './popper';
 
 const apiUser = process.env.NEXT_PUBLIC_API_LOG_OUT
+const ApiCategory = process.env.NEXT_PUBLIC_API_CATEGORY;
 
 const Header = () => {
     const router = useRouter();
     const [user, setUser] = useState(null);
     // const [searchItem, setSearchItem] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [category, setCategory] = useState([]);
+
+    const getCategoryIcon = (categoryName) => {
+        switch (categoryName) {
+            case 'PC':
+                return <FaDesktop />;
+            case 'Laptop':
+                return <FaLaptop />;
+            case 'Mobile, Tablet, Watch':
+                return <FaMobileAlt />;
+            case 'Screen':
+                    return <MdOutlineScreenshotMonitor />;
+            case 'Component':
+                    return <BsCpu />;        
+            case 'Keyboard':
+                return <CiKeyboard />;
+            case 'Mouse':
+                return <CiDesktopMouse1/>
+            case 'Headphone, Loudspeaker, Micro':
+                return <FaHeadphones/>
+            case 'Accessory':
+                return <BsUsbMicro />
+            // Thêm các trường hợp khác tương ứng với biểu tượng của danh mục
+            default:
+                return null;
+        }
+    }
 
     useEffect(() => {
         const userJSON = sessionStorage.getItem('user');
         if(userJSON){
             setUser(JSON.parse(userJSON));
         }
-    }, []);
+        axios.get(ApiCategory).then(result => setCategory(result.data))
+    }, []); 
     
     const handleLogout = async() => {
         try {
@@ -103,11 +136,29 @@ const Header = () => {
                 )}
             </div>
             <div className=" flex gap-10 h-10 items-center ">
-                <div className="text-xl flex gap-2 items-center hover:text-red-500">
-                    <FaBars/>
-                    Category
-                    <BiChevronDown className="text-red-500"/>
-                </div>
+                <Tippy
+                    interactive
+                    visible
+                    arrow
+                    placement='bottom-start'
+                    render={attrs => (
+                        <div className="box" tabIndex="-1" {...attrs}>
+                            <Popper>
+                                <div className='bg-white w-56 h-full py-1 border-2 rounded-md flex flex-col gap-5 '>
+                                    {category.map(cate => (
+                                        <Link href={`/category/${cate._id}`} className='flex'>{getCategoryIcon(cate.name)} {cate.name}</Link>
+                                    ))}
+                                </div>
+                            </Popper>
+                        </div>
+                    )}
+                >
+                    <div className="text-xl flex gap-2 items-center hover:text-red-500">
+                        <FaBars/>
+                        Category
+                        <BiChevronDown className="text-red-500"/>
+                    </div>
+                </Tippy>
                 <Link href={'/introduce'} className="text-xl flex gap-2 items-center hover:text-red-500">
                     <BiInfoCircle />
                     Introduce
