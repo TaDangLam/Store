@@ -72,22 +72,7 @@ const ProductForm = () => {
         formData.append(`properties[${index}][value]`, property.value);
     });
     await axios.post(apiProduct, formData);
-    // const data = {
-    //   name,
-    //   categories,
-    //   price,
-    //   amount,
-    //   images: images.map((image) => URL.createObjectURL(image)),
-    //   properties: properties.map((p) => ({
-    //     key: p.key,
-    //     value: p.value,
-    //   })),
-    // };
-    // await axios.post(apiProduct, data)
-    //     .then(result => console.log(result.data))
-    //     .catch(err => console.log(err))
- 
-    // router.push('/dashboard/product');
+    router.push('/dashboard/product');
   };
 
   console.log(images)

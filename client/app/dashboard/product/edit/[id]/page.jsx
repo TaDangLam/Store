@@ -90,6 +90,7 @@ const EditProduct = () => {
           formData.append(`properties[${index}][value]`, property.value);
       });
       await axios.patch(apiProduct + `/${product._id}`, formData);
+      router.push('/dashboard/product')
     };
   
     console.log(categories);

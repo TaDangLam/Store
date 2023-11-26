@@ -170,8 +170,8 @@ const userController = {
     countUser: async (req, res) => {
         try {
             // Assuming you have a 'Product' model, use its 'countDocuments' method
-            const userCount = await User.countDocuments();
-    
+            const userCount = await User.countDocuments()
+                                        .where('role').equals('customer');
             // Send the count as a response
             res.status(200).json({ count: userCount });
         } catch (err) {

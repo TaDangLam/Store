@@ -1,7 +1,7 @@
 
 const Popper = ({ children }) => {
     return ( 
-        <div>{children}</div>
+        <div className="">{children}</div>
      );
 }
  
