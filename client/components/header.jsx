@@ -135,38 +135,42 @@ const Header = () => {
                     </div>
                 )}
             </div>
-            <div className=" flex gap-10 h-10 items-center ">
+            <div className=" flex gap-32 font-medium h-10 items-center ">
                 <Tippy
                     interactive
-                    visible
+                    // visible
                     arrow
                     placement='bottom-start'
                     render={attrs => (
-                        <div className="box" tabIndex="-1" {...attrs}>
+                        <div className="box " tabIndex="-1" {...attrs}>
                             <Popper>
-                                <div className='bg-white w-56 h-full py-1 border-2 rounded-md flex flex-col gap-5 '>
+                                <div className='bg-white w-[24.859rem]  h-[34.1rem] py-2 border-2 rounded-lg flex flex-col gap-5 cursor-pointer'>
                                     {category.map(cate => (
-                                        <Link href={`/category/${cate._id}`} className='flex'>{getCategoryIcon(cate.name)} {cate.name}</Link>
+                                        <Link href={`/category/${cate._id}`} className='flex items-center gap-2 p-2  hover:bg-gradient-to-r from-signup-left to-signup-right hover:text-white'>{getCategoryIcon(cate.name)} {cate.name}</Link>
                                     ))}
                                 </div>
                             </Popper>
                         </div>
                     )}
                 >
-                    <div className="text-xl flex gap-2 items-center hover:text-red-500">
+                    <div className="text-xl flex gap-2 items-center hover:text-red-500 cursor-pointer">
                         <FaBars/>
                         Category
-                        <BiChevronDown className="text-red-500"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                        </svg>
                     </div>
                 </Tippy>
-                <Link href={'/introduce'} className="text-xl flex gap-2 items-center hover:text-red-500">
-                    <BiInfoCircle />
-                    Introduce
-                </Link>
-                <Link href={'/blog'} className="text-xl flex gap-2 items-center hover:text-red-500">
-                    <FaBlogger />
-                    Blog
-                </Link>
+                <div className='text-xl flex gap-8 items-center '>
+                    <Link href={'/introduce'} className="text-xl flex gap-2 items-center hover:text-red-500">
+                        <BiInfoCircle />
+                        Introduce
+                    </Link>
+                    <Link href={'/blog'} className="text-xl flex gap-2 items-center hover:text-red-500">
+                        <FaBlogger />
+                        Blog
+                    </Link>
+                </div>
             </div>
          </div>
     )

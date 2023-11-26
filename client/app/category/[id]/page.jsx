@@ -72,7 +72,7 @@ const Category = () => {
           const sortOrder = sortProperty === 'asc' ? 'asc' : 'desc';
           const sorted = mergeSort([...productByCategory], sortProperty, sortOrder);
           setSortedProducts(sorted);
-        } else {
+        } else {    
           setSortedProducts([...productByCategory]);
         }
       }, [productByCategory, sortProperty]);

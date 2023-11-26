@@ -14,6 +14,7 @@ module.exports = {
       },
       width: {
         488: '50rem',
+        357: '24.859rem',
       },
       borderRadius: {
         'large': '12px',
@@ -45,6 +46,7 @@ module.exports = {
         '100': '22.5rem',
         '983': '61.4375rem',
       },
+      
     },
   },
   plugins: [],
